@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using com.strava.api.Api;
@@ -132,7 +133,7 @@ namespace com.strava.api.Client
                 );
 
             String json = WebRequest.SendGet(new Uri(getUrl));
-
+            Debug.WriteLine(getUrl);
             return Unmarshaller<List<ActivityStream>>.Unmarshal(json);
         }
 

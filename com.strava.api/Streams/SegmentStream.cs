@@ -62,7 +62,7 @@ namespace com.strava.api.Streams
                 }
                 if (Type.Equals("velocity_smooth"))
                 {
-                    return StreamType.VelocitySmooth;
+                    return StreamType.Velocity_Smooth;
                 }
 
                 return StreamType.Watts;

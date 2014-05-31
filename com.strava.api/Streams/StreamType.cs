@@ -27,7 +27,7 @@ namespace com.strava.api.Streams
         /// <summary>
         /// Velocity information is received.
         /// </summary>
-        VelocitySmooth = 16,
+        Velocity_Smooth = 16,
         /// <summary>
         /// Heartrate information is received.
         /// </summary>
