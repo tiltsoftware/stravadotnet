@@ -101,11 +101,11 @@ namespace com.strava.api.Upload
                     {
                         UploadChecked(this, new UploadStatusCheckedEventArgs(CurrentUploadStatus.Error));
                     }
+                    ErrorMessage = status.Error;
                     if (Error != null)
                     {
                         Error(this, EventArgs.Empty);
                     }
-                    ErrorMessage = status.Error;
                     Finish();
                     break;
 
