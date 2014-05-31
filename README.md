@@ -3,11 +3,11 @@ Strava.NET
 
 NOTE: Visit the new homepage at www.sascha-simon.com for more information and updates on the Strava Client using the framework.
 
-Current version: 2.7.0 (05/02/2014)
+Current version: 2.7.1 (05/31/2014)
 
 You can now check out the Samples-Project: [Samples-project on GitHub](https://github.com/inexcitus/stravasamples)
 
-[Changelog](http://www.sascha-simon.com/changelog.html)
+[Changelog](http://www.sascha-simon.com/Changelog)
 
 Hopefully this small framework makes using the Strava API a little bit easier!
 Please keep in mind that this framework is in a pretty early stage and things are about to change.
