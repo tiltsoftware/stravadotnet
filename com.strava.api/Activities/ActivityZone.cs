@@ -56,17 +56,5 @@ namespace com.strava.api.Activities
         /// </summary>
         [JsonProperty("max")]
         public int Max { get; set; }
-
-        /// <summary>
-        /// The bike weight.
-        /// </summary>
-        [JsonProperty("bike_weight")]
-        public float BikeWeight { get; set; }
-
-        /// <summary>
-        /// The athlete's weight.
-        /// </summary>
-        [JsonProperty("athlete_weight")]
-        public float AthleteWeight { get; set; }
     }
 }

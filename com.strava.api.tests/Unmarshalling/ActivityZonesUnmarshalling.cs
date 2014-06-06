@@ -28,13 +28,6 @@ namespace com.strava.api.tests.Unmarshalling
         }
 
         [TestMethod]
-        public void TestBikeWeight()
-        {
-            List<ActivityZone> zone = Unmarshaller<List<ActivityZone>>.Unmarshal(_json);
-            Assert.IsTrue(zone.ElementAt(1).BikeWeight > 0);
-        }
-
-        [TestMethod]
         public void TestBucketSizes()
         {
             List<ActivityZone> zone = Unmarshaller<List<ActivityZone>>.Unmarshal(_json);

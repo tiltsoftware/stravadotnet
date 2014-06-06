@@ -19,6 +19,30 @@ namespace com.strava.api.Segments
         public long Id { get; set; }
 
         /// <summary>
+        /// The average cadence.
+        /// </summary>
+        [JsonProperty("average_cadence")]
+        public float AverageCadence { get; set; }
+
+        /// <summary>
+        /// The average power in watts.
+        /// </summary>
+        [JsonProperty("average_watts")]
+        public float AveragePower { get; set; }
+
+        /// <summary>
+        /// The average heartrate.
+        /// </summary>
+        [JsonProperty("average_heartrate")]
+        public float AverageHeartrate { get; set; }
+
+        /// <summary>
+        /// The max heartrate.
+        /// </summary>
+        [JsonProperty("max_heartrate")]
+        public float MaxHeartrate { get; set; }
+
+        /// <summary>
         /// Indicates level of detail
         /// </summary>
         [JsonProperty("resource_state")]
