@@ -98,6 +98,41 @@ namespace com.strava.api.Client
             return Unmarshaller<List<SegmentStream>>.Unmarshal(json);
         }
 
+        /// <summary>
+        /// Gets a segment effort stream asynchronously.
+        /// </summary>
+        /// <param name="effortId">The Strava segment effort id.</param>
+        /// <param name="typeFlags">Specifies the type of stream.</param>
+        /// <param name="resolution">Specifies the resolution of the stream.</param>
+        /// <returns>The stream data.</returns>
+        public async Task<List<SegmentEffortStream>> GetSegmentEffortStreamAsync(String effortId, SegmentStreamType typeFlags, StreamResolution resolution = StreamResolution.All)
+        {
+            StringBuilder types = new StringBuilder();
+
+            foreach (SegmentStreamType type in (StreamType[])Enum.GetValues(typeof(SegmentStreamType)))
+            {
+                if (typeFlags.HasFlag(type))
+                {
+                    types.Append(type.ToString().ToLower());
+                    types.Append(",");
+                }
+            }
+
+            types.Remove(types.ToString().Length - 1, 1);
+
+            String getUrl = String.Format("https://www.strava.com/api/v3/segment_efforts/{0}/streams/{1}?{2}&access_token={3}",
+                effortId,
+                types,
+                resolution != StreamResolution.All ? "resolution=" + resolution.ToString().ToLower() : "",
+                Authentication.AccessToken
+                );
+
+            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+
+            return Unmarshaller<List<SegmentEffortStream>>.Unmarshal(json);
+        }
+
+
         #endregion
         
         #region Sync
@@ -135,6 +170,40 @@ namespace com.strava.api.Client
             String json = WebRequest.SendGet(new Uri(getUrl));
             Debug.WriteLine(getUrl);
             return Unmarshaller<List<ActivityStream>>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Gets a segment effort stream.
+        /// </summary>
+        /// <param name="effortId">The Strava segment effort id.</param>
+        /// <param name="typeFlags">Specifies the type of stream.</param>
+        /// <param name="resolution">Specifies the resolution of the stream.</param>
+        /// <returns>The stream data.</returns>
+        public List<SegmentEffortStream> GetSegmentEffortStream(String effortId, SegmentStreamType typeFlags, StreamResolution resolution = StreamResolution.All)
+        {
+            StringBuilder types = new StringBuilder();
+
+            foreach (SegmentStreamType type in (StreamType[])Enum.GetValues(typeof(SegmentStreamType)))
+            {
+                if (typeFlags.HasFlag(type))
+                {
+                    types.Append(type.ToString().ToLower());
+                    types.Append(",");
+                }
+            }
+
+            types.Remove(types.ToString().Length - 1, 1);
+
+            String getUrl = String.Format("https://www.strava.com/api/v3/segment_efforts/{0}/streams/{1}?{2}&access_token={3}",
+                effortId,
+                types,
+                resolution != StreamResolution.All ? "resolution=" + resolution.ToString().ToLower() : "",
+                Authentication.AccessToken
+                );
+
+            String json = WebRequest.SendGet(new Uri(getUrl));
+
+            return Unmarshaller<List<SegmentEffortStream>>.Unmarshal(json);
         }
 
         /// <summary>

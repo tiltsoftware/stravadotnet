@@ -20,5 +20,9 @@ namespace com.strava.api.Streams
         /// Segment altitude information is received.
         /// </summary>
         Altitude = 4,
+        /// <summary>
+        /// Segment time information is received.
+        /// </summary>
+        Time = 8
     }
 }

@@ -113,6 +113,7 @@
     <Compile Include="Http\WebRequest.cs" />
     <Compile Include="Segments\ExplorerResult.cs" />
     <Compile Include="Segments\ExplorerSegment.cs" />
+    <Compile Include="Streams\SegmentEffortStream.cs" />
     <Compile Include="Upload\CheckStatus.cs" />
     <Compile Include="Upload\CurrentUploadStatus.cs" />
     <Compile Include="Upload\DataFormat.cs" />
