@@ -93,15 +93,9 @@ namespace com.strava.api.Segments
         public Boolean IsPrivate { get; set; }
 
         /// <summary>
-        /// The personal record time in seconds.
+        /// True if the segment is starred by the currently authenticated athlete.
         /// </summary>
-        [JsonProperty("pr_time")]
-        public int PersonalRecordTime { get; set; }
-
-        /// <summary>
-        /// The personal record distance in meters.
-        /// </summary>
-        [JsonProperty("pr_distance")]
-        public float PersonalRecordDistance { get; set; }
+        [JsonProperty("starred")]
+        public Boolean IsStarred { get; set; }
     }
 }

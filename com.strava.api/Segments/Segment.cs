@@ -152,5 +152,11 @@ namespace com.strava.api.Segments
         /// </summary>
         [JsonProperty("starred")]
         public Boolean IsStarred { get; set; }
+
+        /// <summary>
+        /// Number of stars on this segment. 
+        /// </summary>
+        [JsonProperty("star_count")]
+        public int StarCount { get; set; }
     }
 }
