@@ -232,22 +232,28 @@ namespace com.strava.api.Activities
         /// <summary>
         /// Coordinate where the activity was started.
         /// </summary>
-        public double StartLatitude
+        public double? StartLatitude
         {
             get
             {
-                return StartPoint.ElementAt(0);
+                if (StartPoint != null && StartPoint.Count > 0)
+                    return StartPoint.ElementAt(0);
+
+                return null;
             }
         }
 
         /// <summary>
         /// Coordinate where the activity was started.
         /// </summary>
-        public double StartLongitude
+        public double? StartLongitude
         {
             get
             {
-                return StartPoint.ElementAt(1);
+                if (StartPoint != null && StartPoint.Count > 0)
+                    return StartPoint.ElementAt(1);
+
+                return null;
             }
         }
 
@@ -260,24 +266,36 @@ namespace com.strava.api.Activities
         /// <summary>
         /// Coordinate where the activity was ended.
         /// </summary>
-        public double EndLatitude
+        public double? EndLatitude
         {
             get
             {
-                return EndPoint.ElementAt(0);
+                if (EndPoint != null && EndPoint.Count > 0)
+                    return EndPoint.ElementAt(0);
+
+                return null;
             }
         }
 
         /// <summary>
         /// Coordinate where the activity was ended.
         /// </summary>
-        public double EndLongitude
+        public double? EndLongitude
         {
             get
             {
-                return EndPoint.ElementAt(1);
+                if (EndPoint != null && EndPoint.Count > 0)
+                    return EndPoint.ElementAt(1);
+
+                return null;
             }
         }
+
+        /// <summary>
+        /// True if the power data comes from a power meter, false if the data is estimated.
+        /// </summary>
+        [JsonProperty("device_watts")]
+        public bool HasPowerMeter { get; set; }
 
         /// <summary>
         /// Map representing the route of the activity.
