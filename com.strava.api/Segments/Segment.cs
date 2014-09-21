@@ -67,7 +67,7 @@ namespace com.strava.api.Segments
         /// The climb category of the segment. Values are HC, 1, 2, 3 or 4.
         /// </summary>
         [JsonProperty("climb_category")]
-        public int Category { get; set; }
+        private int _category { get; set; }
 
         /// <summary>
         /// The city where the segment is located in.
@@ -158,5 +158,30 @@ namespace com.strava.api.Segments
         /// </summary>
         [JsonProperty("star_count")]
         public int StarCount { get; set; }
+
+        /// <summary>
+        /// Returns the category of a segment.
+        /// </summary>
+        public ClimbCategory Category
+        {
+            get
+            {
+                switch (_category)
+                {
+                    case 0:
+                        return ClimbCategory.CategoryHc;
+                    case 1:
+                        return ClimbCategory.Category4;
+                    case 2:
+                        return ClimbCategory.Category3;
+                    case 3:
+                        return ClimbCategory.Category2;
+                    case 4:
+                        return ClimbCategory.Category1;
+                    default:
+                        return ClimbCategory.CategoryNc;
+                }
+            }
+        }
     }
 }

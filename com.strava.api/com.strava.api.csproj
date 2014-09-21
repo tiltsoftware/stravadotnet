@@ -111,6 +111,7 @@
     <Compile Include="Http\AsyncResponseReceivedEventArgs.cs" />
     <Compile Include="Http\ResponseReceivedEventArgs.cs" />
     <Compile Include="Http\WebRequest.cs" />
+    <Compile Include="Segments\ClimbCategory.cs" />
     <Compile Include="Segments\ExplorerResult.cs" />
     <Compile Include="Segments\ExplorerSegment.cs" />
     <Compile Include="Streams\SegmentEffortStream.cs" />
