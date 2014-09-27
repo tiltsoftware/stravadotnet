@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using com.strava.api.Gear;
 using com.strava.api.Segments;
 using Newtonsoft.Json;
@@ -27,5 +28,11 @@ namespace com.strava.api.Activities
         /// </summary>
         [JsonProperty("calories")]
         public float Calories { get; set; }
+
+        /// <summary>
+        /// The activity's description.
+        /// </summary>
+        [JsonProperty("description")]
+        public String Description { get; set; }
     }
 }
