@@ -244,6 +244,12 @@ namespace com.strava.api.Activities
         }
 
         /// <summary>
+        /// Rides with power meter data only similar to xPower or Normalized Power.
+        /// </summary>
+        [JsonProperty("weighted_average_watts")]
+        public int WeightedAverageWatts { get; set; }
+
+        /// <summary>
         /// Coordinate where the activity was started.
         /// </summary>
         public double? StartLongitude
