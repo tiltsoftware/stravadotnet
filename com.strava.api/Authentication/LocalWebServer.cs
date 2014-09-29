@@ -1,11 +1,29 @@
-﻿using System;
+﻿#region Copyright (C) 2014 Sascha Simon
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see http://www.gnu.org/licenses/.
+//
+//  Visit the official homepage at http://www.sascha-simon.com
+
+#endregion
+
+using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
 using com.strava.api.Common;
-using WebRequest = com.strava.api.Http.WebRequest;
 
 namespace com.strava.api.Authentication
 {
@@ -109,7 +127,7 @@ namespace com.strava.api.Authentication
 
             // Getting the Access Token
             String url = String.Format("https://www.strava.com/oauth/token?client_id={0}&client_secret={1}&code={2}", ClientId, ClientSecret, code);
-            String json = await WebRequest.SendPostAsync(new Uri(url));
+            String json = await Http.WebRequest.SendPostAsync(new Uri(url));
 
             AccessToken auth = Unmarshaller<AccessToken>.Unmarshal(json);
 

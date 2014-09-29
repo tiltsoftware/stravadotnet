@@ -1,4 +1,23 @@
-﻿using System;
+﻿#region Copyright (C) 2014 Sascha Simon
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see http://www.gnu.org/licenses/.
+//
+//  Visit the official homepage at http://www.sascha-simon.com
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using com.strava.api.Activities;
@@ -7,7 +26,6 @@ using com.strava.api.Athletes;
 using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Utilities;
-using WebRequest = com.strava.api.Http.WebRequest;
 
 namespace com.strava.api.Client
 {
@@ -42,7 +60,7 @@ namespace com.strava.api.Client
         public async Task<Activity> GetActivityAsync(String id, bool includeEfforts)
         {
             String getUrl = String.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -101,7 +119,7 @@ namespace com.strava.api.Client
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -160,7 +178,7 @@ namespace com.strava.api.Client
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -173,7 +191,7 @@ namespace com.strava.api.Client
         public async Task<List<Comment>> GetCommentsAsync(String activityId)
         {
             String getUrl = String.Format("{0}/{1}/comments?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<Comment>>.Unmarshal(json);
         }
@@ -186,7 +204,7 @@ namespace com.strava.api.Client
         {
             String deleteUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Activities, activityId, Authentication.AccessToken);
 
-            await WebRequest.SendDeleteAsync(new Uri(deleteUrl));
+            await Http.WebRequest.SendDeleteAsync(new Uri(deleteUrl));
         }
 
         /// <summary>
@@ -197,7 +215,7 @@ namespace com.strava.api.Client
         public async Task<List<Athlete>> GetKudosAsync(String activityId)
         {
             String getUrl = String.Format("{0}/{1}/kudos?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<Athlete>>.Unmarshal(json);
         }
@@ -210,7 +228,7 @@ namespace com.strava.api.Client
         public async Task<List<ActivityZone>> GetActivityZonesAsync(String activityId)
         {
             String getUrl = String.Format("{0}/{1}/zones?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityZone>>.Unmarshal(json);
         }
@@ -224,7 +242,7 @@ namespace com.strava.api.Client
         public async Task<List<ActivitySummary>> GetActivitiesAsync(int page, int perPage)
         {
             String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.Activities, page, perPage, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -238,7 +256,7 @@ namespace com.strava.api.Client
         public async Task<List<ActivitySummary>> GetFollowersActivitiesAsync(int page, int perPage)
         {
             String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.ActivitiesFollowers, page, perPage, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -362,7 +380,7 @@ namespace com.strava.api.Client
                 value,
                 Authentication.AccessToken);
 
-            String json = await WebRequest.SendPutAsync(new Uri(putUrl));
+            String json = await Http.WebRequest.SendPutAsync(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -381,7 +399,7 @@ namespace com.strava.api.Client
                 type,
                 Authentication.AccessToken);
 
-            String json = await WebRequest.SendPutAsync(new Uri(putUrl));
+            String json = await Http.WebRequest.SendPutAsync(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -510,7 +528,7 @@ namespace com.strava.api.Client
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -631,7 +649,7 @@ namespace com.strava.api.Client
                 activityId,
                 Authentication.AccessToken);
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<Photo>>.Unmarshal(json);
         }
@@ -649,7 +667,7 @@ namespace com.strava.api.Client
                 activityId,
                 Authentication.AccessToken);
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityLap>>.Unmarshal(json);
         }
@@ -667,7 +685,7 @@ namespace com.strava.api.Client
         public Activity GetActivity(String id, bool includeEfforts)
         {
             String getUrl = String.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -726,7 +744,7 @@ namespace com.strava.api.Client
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -785,7 +803,7 @@ namespace com.strava.api.Client
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -798,7 +816,7 @@ namespace com.strava.api.Client
         public List<Comment> GetComments(String activityId)
         {
             String getUrl = String.Format("{0}/{1}/comments?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<Comment>>.Unmarshal(json);
         }
@@ -811,7 +829,7 @@ namespace com.strava.api.Client
         public List<Athlete> GetKudos(String activityId)
         {
             String getUrl = String.Format("{0}/{1}/kudos?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<Athlete>>.Unmarshal(json);
         }
@@ -824,7 +842,7 @@ namespace com.strava.api.Client
         public List<ActivityZone> GetActivityZones(String activityId)
         {
             String getUrl = String.Format("{0}/{1}/zones?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityZone>>.Unmarshal(json);
         }
@@ -838,7 +856,7 @@ namespace com.strava.api.Client
         public List<ActivitySummary> GetActivities(int page, int perPage)
         {
             String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.Activities, page, perPage, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -895,7 +913,7 @@ namespace com.strava.api.Client
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -909,7 +927,7 @@ namespace com.strava.api.Client
         public List<ActivitySummary> GetFollowersActivities(int page, int perPage)
         {
             String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.ActivitiesFollowers, page, perPage, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -1006,7 +1024,7 @@ namespace com.strava.api.Client
                 type,
                 Authentication.AccessToken);
 
-            String json = WebRequest.SendPut(new Uri(putUrl));
+            String json = Http.WebRequest.SendPut(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -1051,7 +1069,7 @@ namespace com.strava.api.Client
                 value,
                 Authentication.AccessToken);
 
-            String json = WebRequest.SendPut(new Uri(putUrl));
+            String json = Http.WebRequest.SendPut(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -1247,7 +1265,7 @@ namespace com.strava.api.Client
                 activityId,
                 Authentication.AccessToken);
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<Photo>>.Unmarshal(json);
         }
@@ -1264,7 +1282,7 @@ namespace com.strava.api.Client
                 activityId,
                 Authentication.AccessToken);
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityLap>>.Unmarshal(json);
         }

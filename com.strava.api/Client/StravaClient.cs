@@ -1,18 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Copyright (C) 2014 Sascha Simon
+
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see http://www.gnu.org/licenses/.
+//
+//  Visit the official homepage at http://www.sascha-simon.com
+
+#endregion
+
+using System;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using com.strava.api.Activities;
-using com.strava.api.Api;
-using com.strava.api.Athletes;
 using com.strava.api.Authentication;
-using com.strava.api.Clubs;
-using com.strava.api.Common;
-using com.strava.api.Segments;
-using com.strava.api.Streams;
-using com.strava.api.Utilities;
-using WebRequest = com.strava.api.Http.WebRequest;
 
 namespace com.strava.api.Client
 {
