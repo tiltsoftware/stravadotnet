@@ -26,6 +26,7 @@ using com.strava.api.Api;
 using com.strava.api.Athletes;
 using com.strava.api.Authentication;
 using com.strava.api.Common;
+using com.strava.api.Filters;
 using com.strava.api.Http;
 using com.strava.api.Segments;
 
@@ -44,6 +45,306 @@ namespace com.strava.api.Client
         public SegmentClient(IAuthentication auth) : base(auth) { }
 
         #region Async
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param> 
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        {
+            int page = 1;
+
+            //Create one dummy request to get the number of entries.
+            Leaderboard request = await GetSegmentLeaderboardAsync(segmentId, weight, age, time, gender, 1, 1);
+            int totalAthletes = request.EntryCount;
+
+            Leaderboard leaderboard = new Leaderboard
+            {
+                EffortCount = request.EffortCount,
+                EntryCount = request.EntryCount
+            };
+
+            while ((page - 1) * 200 < totalAthletes)
+            {
+                Leaderboard l = await GetSegmentLeaderboardAsync(segmentId, weight, age, time, gender, page++, 200);
+
+                foreach (LeaderboardEntry entry in l.Entries)
+                {
+                    leaderboard.Entries.Add(entry);
+                }
+            }
+
+            return leaderboard;
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param>
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <param name="page">The result page.</param>
+        /// <param name="perPage">Efforts shown per page.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        {
+            bool useGender = false;
+            bool useTime = false;
+            bool useAge = false;
+            bool useWeight = false;
+            String genderFilter = String.Empty;
+            String timeFilter = String.Empty;
+            String ageFilter = String.Empty;
+            String weightFilter = String.Empty;
+
+            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            {
+                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                useGender = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            {
+                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                useTime = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            {
+                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                useAge = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            {
+                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                useWeight = true;
+            }
+
+            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&page={6}&per_page={7}&access_token={8}",
+                Endpoints.Leaderboard,
+                segmentId,
+                useGender ? genderFilter : String.Empty,
+                useTime ? timeFilter : String.Empty,
+                useAge ? ageFilter : String.Empty,
+                useWeight ? weightFilter : String.Empty,
+                page,
+                perPage,
+                Authentication.AccessToken
+                );
+
+            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+
+            return Unmarshaller<Leaderboard>.Unmarshal(json);
+        }
+        
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="clubId">The club id used to filter the leaderboard.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param> 
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        {
+            int page = 1;
+
+            //Create one dummy request to get the number of entries.
+            Leaderboard request = await GetSegmentLeaderboardAsync(segmentId, clubId, weight, age, time, gender, 1, 1);
+            int totalAthletes = request.EntryCount;
+
+            Leaderboard leaderboard = new Leaderboard
+            {
+                EffortCount = request.EffortCount,
+                EntryCount = request.EntryCount
+            };
+
+            while ((page - 1) * 200 < totalAthletes)
+            {
+                Leaderboard l = await GetSegmentLeaderboardAsync(segmentId, clubId, weight, age, time, gender, page++, 200);
+
+                foreach (LeaderboardEntry entry in l.Entries)
+                {
+                    leaderboard.Entries.Add(entry);
+                }
+            }
+
+            return leaderboard;
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="clubId">The club id used to filter the leaderboard.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param>
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <param name="page">The result page.</param>
+        /// <param name="perPage">Efforts shown per page.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        {
+            bool useGender = false;
+            bool useTime = false;
+            bool useAge = false;
+            bool useWeight = false;
+            String genderFilter = String.Empty;
+            String timeFilter = String.Empty;
+            String ageFilter = String.Empty;
+            String weightFilter = String.Empty;
+
+            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            {
+                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                useGender = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            {
+                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                useTime = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            {
+                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                useAge = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            {
+                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                useWeight = true;
+            }
+
+            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&club_id={6}&page={7}&per_page={8}&access_token={9}",
+                Endpoints.Leaderboard,
+                segmentId,
+                useGender ? genderFilter : String.Empty,
+                useTime ? timeFilter : String.Empty,
+                useAge ? ageFilter : String.Empty,
+                useWeight ? weightFilter : String.Empty,
+                clubId,
+                page,
+                perPage,
+                Authentication.AccessToken
+                );
+
+            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+
+            return Unmarshaller<Leaderboard>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="following">The leaderboard only shows athletes you're following.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param> 
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        {
+            int page = 1;
+
+            //Create one dummy request to get the number of entries.
+            Leaderboard request = await GetSegmentLeaderboardAsync(segmentId, following, weight, age, time, gender, 1, 1);
+            int totalAthletes = request.EntryCount;
+
+            Leaderboard leaderboard = new Leaderboard
+            {
+                EffortCount = request.EffortCount,
+                EntryCount = request.EntryCount
+            };
+
+            while ((page - 1) * 200 < totalAthletes)
+            {
+                Leaderboard l = await GetSegmentLeaderboardAsync(segmentId, following, weight, age, time, gender, page++, 200);
+
+                foreach (LeaderboardEntry entry in l.Entries)
+                {
+                    leaderboard.Entries.Add(entry);
+                }
+            }
+
+            return leaderboard;
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="following">The leaderboard only shows athletes you're following.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param>
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <param name="page">The result page.</param>
+        /// <param name="perPage">Efforts shown per page.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        {
+            bool useGender = false;
+            bool useTime = false;
+            bool useAge = false;
+            bool useWeight = false;
+            String genderFilter = String.Empty;
+            String timeFilter = String.Empty;
+            String ageFilter = String.Empty;
+            String weightFilter = String.Empty;
+
+            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            {
+                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                useGender = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            {
+                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                useTime = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            {
+                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                useAge = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            {
+                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                useWeight = true;
+            }
+
+            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&following={6}&page={7}&per_page={8}&access_token={9}",
+                Endpoints.Leaderboard,
+                segmentId,
+                useGender ? genderFilter : String.Empty,
+                useTime ? timeFilter : String.Empty,
+                useAge ? ageFilter : String.Empty,
+                useWeight ? weightFilter : String.Empty,
+                following,
+                page,
+                perPage,
+                Authentication.AccessToken
+                );
+
+            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+
+            return Unmarshaller<Leaderboard>.Unmarshal(json);
+        }
 
         /// <summary>
         /// Gets all the records of an athlete asynchronously.
@@ -129,235 +430,6 @@ namespace com.strava.api.Client
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
-        }
-
-        /// <summary>
-        /// Gets the gender-filtered leaderboard of a segment asynchronsouly. This method requires the currently authenticated 
-        /// athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, Gender gender)
-        {
-            int page = 1;
-
-            //Create one dummy request to get the number of entries.
-            Leaderboard request = GetSegmentLeaderboard(segmentId, gender, 1, 1);
-            int totalAthletes = request.EntryCount;
-
-            Leaderboard leaderboard = new Leaderboard
-            {
-                EffortCount = request.EffortCount,
-                EntryCount = request.EntryCount
-            };
-
-            while ((page - 1) * 200 < totalAthletes)
-            {
-                Leaderboard l = await GetSegmentLeaderboardAsync(segmentId, gender, page++, 200);
-
-                foreach (LeaderboardEntry entry in l.Entries)
-                {
-                    leaderboard.Entries.Add(entry);
-                }
-            }
-
-            return leaderboard;
-        }
-
-        /// <summary>
-        /// Gets the gender-filtered leaderboard of a segment. This method requires the currently authenticated 
-        /// athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// <param name="page">The result page.</param>
-        /// <param name="perPage">Efforts shown per page.</param>
-        /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, Gender gender, int page, int perPage)
-        {
-            String getUrl = String.Format("{0}/{1}/leaderboard?gender={2}&page={3}&per_page={4}&access_token={5}",
-                Endpoints.Leaderboard,
-                segmentId,
-                gender.ToString().Substring(0, 1),
-                page,
-                perPage,
-                Authentication.AccessToken
-                );
-
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
-        }
-
-        /// <summary>
-        /// Gets the leaderboard filtered by time.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment id.</param>
-        /// <param name="filter">The time filter.</param>
-        /// <returns>A time filtered leaderboard.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, TimeFilter filter)
-        {
-            int page = 1;
-
-            //Create one dummy request to get the number of entries.
-            Leaderboard request = await GetSegmentLeaderboardAsync(segmentId, filter, 1, 1);
-            int totalAthletes = request.EntryCount;
-
-            Leaderboard leaderboard = new Leaderboard
-            {
-                EffortCount = request.EffortCount,
-                EntryCount = request.EntryCount
-            };
-
-            while ((page - 1) * 200 < totalAthletes)
-            {
-                Leaderboard l = await GetSegmentLeaderboardAsync(segmentId, filter, page++, 200);
-
-                foreach (LeaderboardEntry entry in l.Entries)
-                {
-                    leaderboard.Entries.Add(entry);
-                }
-            }
-
-            return leaderboard;
-        }
-
-        /// <summary>
-        /// Gets the leaderboard filtered by time.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment id.</param>
-        /// <param name="filter">The time filter.</param>
-        /// <param name="page">The result page.</param>
-        /// <param name="perPage">Entries per page.</param>
-        /// <returns>A time filtered leaderboard.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, TimeFilter filter, int page, int perPage)
-        {
-            String fltr = String.Empty;
-
-            // ‘this_year’, ‘this_month’, ‘this_week’, ‘today’
-            switch (filter)
-            {
-                case TimeFilter.ThisMonth:
-                    fltr = "this_month";
-                    break;
-                case TimeFilter.ThisWeek:
-                    fltr = "this_week";
-                    break;
-                case TimeFilter.ThisYear:
-                    fltr = "this_year";
-                    break;
-                case TimeFilter.Today:
-                    fltr = "today";
-                    break;
-            }
-
-            String getUrl = String.Format("{0}/{1}/leaderboard?date_range={2}&page={3}&per_page={4}&access_token={5}",
-                Endpoints.Leaderboard,
-                segmentId,
-                fltr,
-                page,
-                perPage,
-                Authentication.AccessToken
-                );
-
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
-        }
-
-        /// <summary>
-        /// Gets the gender-filtered and age-filtered leaderboard of a segment asynchronsouly. This method requires the currently authenticated 
-        /// athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// /// <param name="age">The age range used to filter the leaderboard.</param>
-        /// <returns>The leaderboard filtered by gender and age.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, Gender gender, AgeGroup age)
-        {
-            String ageFilter = String.Empty;
-
-            switch (age)
-            {
-                case AgeGroup.One:
-                    ageFilter = "0_24";
-                    break;
-                case AgeGroup.Two:
-                    ageFilter = "25_34";
-                    break;
-                case AgeGroup.Three:
-                    ageFilter = "35_44";
-                    break;
-                case AgeGroup.Four:
-                    ageFilter = "45_54";
-                    break;
-                case AgeGroup.Five:
-                    ageFilter = "55_64";
-                    break;
-                case AgeGroup.Six:
-                    ageFilter = "65_plus";
-                    break;
-            }
-
-            String getUrl = String.Format("{0}/{1}/leaderboard?gender={2}&age_group={3}&filter=age_group&access_token={4}",
-                Endpoints.Leaderboard,
-                segmentId,
-                gender.ToString().Substring(0, 1),
-                ageFilter,
-                Authentication.AccessToken
-                );
-
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
-        }
-
-        /// <summary>
-        /// Gets the gender-filtered and weight-class filtered leaderboard of a segment asynchronsouly. This method requires the currently 
-        /// authenticated  athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// /// <param name="weight">The weight class used to filter the leaderboard.</param>
-        /// <returns>The leaderboard filtered by gender and weight class.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, Gender gender, WeightClass weight)
-        {
-            String weightClass = String.Empty;
-
-            switch (weight)
-            {
-                case WeightClass.One:
-                    weightClass = "0_54";
-                    break;
-                case WeightClass.Two:
-                    weightClass = "55_64";
-                    break;
-                case WeightClass.Three:
-                    weightClass = "65_74";
-                    break;
-                case WeightClass.Four:
-                    weightClass = "75_84";
-                    break;
-                case WeightClass.Five:
-                    weightClass = "85_94";
-                    break;
-                case WeightClass.Six:
-                    weightClass = "95_plus";
-                    break;
-            }
-
-            String getUrl = String.Format("{0}/{1}/leaderboard?gender={2}&weight_class={3}&filter=weight_class&access_token={4}",
-                Endpoints.Leaderboard,
-                segmentId,
-                gender.ToString().Substring(0, 1),
-                weightClass,
-                Authentication.AccessToken
-                );
-
             String json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
@@ -469,6 +541,306 @@ namespace com.strava.api.Client
         #region Sync
 
         /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param> 
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public Leaderboard GetSegmentLeaderboard(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        {
+            int page = 1;
+
+            //Create one dummy request to get the number of entries.
+            Leaderboard request = GetSegmentLeaderboard(segmentId, weight, age, time, gender, 1, 1);
+            int totalAthletes = request.EntryCount;
+
+            Leaderboard leaderboard = new Leaderboard
+            {
+                EffortCount = request.EffortCount,
+                EntryCount = request.EntryCount
+            };
+
+            while ((page - 1) * 200 < totalAthletes)
+            {
+                Leaderboard l = GetSegmentLeaderboard(segmentId, weight, age, time, gender, page++, 200);
+
+                foreach (LeaderboardEntry entry in l.Entries)
+                {
+                    leaderboard.Entries.Add(entry);
+                }
+            }
+
+            return leaderboard;
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param>
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <param name="page">The result page.</param>
+        /// <param name="perPage">Efforts shown per page.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public Leaderboard GetSegmentLeaderboard(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        {
+            bool useGender = false;
+            bool useTime = false;
+            bool useAge = false;
+            bool useWeight = false;
+            String genderFilter = String.Empty;
+            String timeFilter = String.Empty;
+            String ageFilter = String.Empty;
+            String weightFilter = String.Empty;
+
+            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            {
+                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                useGender = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            {
+                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                useTime = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            {
+                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                useAge = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            {
+                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                useWeight = true;
+            }
+
+            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&page={6}&per_page={7}&access_token={8}",
+                Endpoints.Leaderboard,
+                segmentId,
+                useGender ? genderFilter : String.Empty,
+                useTime ? timeFilter : String.Empty,
+                useAge ? ageFilter : String.Empty,
+                useWeight ? weightFilter : String.Empty,
+                page,
+                perPage,
+                Authentication.AccessToken
+                );
+
+            String json = WebRequest.SendGet(new Uri(getUrl));
+
+            return Unmarshaller<Leaderboard>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="clubId">The club id used to filter the leaderboard.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param> 
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public Leaderboard GetSegmentLeaderboard(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        {
+            int page = 1;
+
+            //Create one dummy request to get the number of entries.
+            Leaderboard request = GetSegmentLeaderboard(segmentId, clubId, weight, age, time, gender, 1, 1);
+            int totalAthletes = request.EntryCount;
+
+            Leaderboard leaderboard = new Leaderboard
+            {
+                EffortCount = request.EffortCount,
+                EntryCount = request.EntryCount
+            };
+
+            while ((page - 1) * 200 < totalAthletes)
+            {
+                Leaderboard l = GetSegmentLeaderboard(segmentId, clubId, weight, age, time, gender, page++, 200);
+
+                foreach (LeaderboardEntry entry in l.Entries)
+                {
+                    leaderboard.Entries.Add(entry);
+                }
+            }
+
+            return leaderboard;
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="clubId">The club id used to filter the leaderboard.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param>
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <param name="page">The result page.</param>
+        /// <param name="perPage">Efforts shown per page.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public Leaderboard GetSegmentLeaderboard(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        {
+            bool useGender = false;
+            bool useTime = false;
+            bool useAge = false;
+            bool useWeight = false;
+            String genderFilter = String.Empty;
+            String timeFilter = String.Empty;
+            String ageFilter = String.Empty;
+            String weightFilter = String.Empty;
+
+            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            {
+                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                useGender = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            {
+                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                useTime = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            {
+                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                useAge = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            {
+                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                useWeight = true;
+            }
+
+            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&club_id={6}&page={7}&per_page={8}&access_token={9}",
+                Endpoints.Leaderboard,
+                segmentId,
+                useGender ? genderFilter : String.Empty,
+                useTime ? timeFilter : String.Empty,
+                useAge ? ageFilter : String.Empty,
+                useWeight ? weightFilter : String.Empty,
+                clubId,
+                page,
+                perPage,
+                Authentication.AccessToken
+                );
+
+            String json = WebRequest.SendGet(new Uri(getUrl));
+
+            return Unmarshaller<Leaderboard>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="following">The leaderboard only shows athletes you're following.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param> 
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public Leaderboard GetSegmentLeaderboard(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        {
+            int page = 1;
+
+            //Create one dummy request to get the number of entries.
+            Leaderboard request = GetSegmentLeaderboard(segmentId, following, weight, age, time, gender, 1, 1);
+            int totalAthletes = request.EntryCount;
+
+            Leaderboard leaderboard = new Leaderboard
+            {
+                EffortCount = request.EffortCount,
+                EntryCount = request.EntryCount
+            };
+
+            while ((page - 1) * 200 < totalAthletes)
+            {
+                Leaderboard l = GetSegmentLeaderboard(segmentId, following, weight, age, time, gender, page++, 200);
+
+                foreach (LeaderboardEntry entry in l.Entries)
+                {
+                    leaderboard.Entries.Add(entry);
+                }
+            }
+
+            return leaderboard;
+        }
+
+        /// <summary>
+        /// Gets the leaderboard of a segment. You can use various filters to filter the data.
+        /// Some of the filters require a Strava Premium account!
+        /// </summary>
+        /// <param name="segmentId">The Strava segment Id.</param>
+        /// <param name="following">The leaderboard only shows athletes you're following.</param>
+        /// <param name="weight">The weight class used to filter the leaderboard.</param>
+        /// <param name="age">The age group used to filter the leaderboard.</param>
+        /// <param name="time">The time used to filter the leaderboard.</param>
+        /// <param name="gender">The gender used to filter the leaderboard.</param>
+        /// <param name="page">The result page.</param>
+        /// <param name="perPage">Efforts shown per page.</param>
+        /// <returns>The leaderboard filtered by gender.</returns>
+        public Leaderboard GetSegmentLeaderboard(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        {
+            bool useGender = false;
+            bool useTime = false;
+            bool useAge = false;
+            bool useWeight = false;
+            String genderFilter = String.Empty;
+            String timeFilter = String.Empty;
+            String ageFilter = String.Empty;
+            String weightFilter = String.Empty;
+
+            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            {
+                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                useGender = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            {
+                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                useTime = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            {
+                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                useAge = true;
+            }
+            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            {
+                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                useWeight = true;
+            }
+
+            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&following={6}&page={7}&per_page={8}&access_token={9}",
+                Endpoints.Leaderboard,
+                segmentId,
+                useGender ? genderFilter : String.Empty,
+                useTime ? timeFilter : String.Empty,
+                useAge ? ageFilter : String.Empty,
+                useWeight ? weightFilter : String.Empty,
+                following,
+                page,
+                perPage,
+                Authentication.AccessToken
+                );
+
+            String json = WebRequest.SendGet(new Uri(getUrl));
+
+            return Unmarshaller<Leaderboard>.Unmarshal(json);
+        }
+
+        /// <summary>
         /// Gets all the records of an athlete.
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
@@ -558,159 +930,6 @@ namespace com.strava.api.Client
         }
 
         /// <summary>
-        /// Gets the gender-filtered leaderboard of a segment. This method requires the currently authenticated 
-        /// athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, Gender gender)
-        {
-            int page = 1;
-
-            //Create one dummy request to get the number of entries.
-            Leaderboard request = GetSegmentLeaderboard(segmentId, gender, 1, 1);
-            int totalAthletes = request.EntryCount;
-
-            Leaderboard leaderboard = new Leaderboard
-            {
-                EffortCount = request.EffortCount,
-                EntryCount = request.EntryCount
-            };
-
-            while ((page - 1) * 200 < totalAthletes)
-            {
-                Leaderboard l = GetSegmentLeaderboard(segmentId, gender, page++, 200);
-
-                foreach (LeaderboardEntry entry in l.Entries)
-                {
-                    leaderboard.Entries.Add(entry);
-                }
-            }
-
-            return leaderboard;
-        }
-
-        /// <summary>
-        /// Gets the gender-filtered leaderboard of a segment. This method requires the currently authenticated 
-        /// athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// <param name="page">The result page.</param>
-        /// <param name="perPage">Efforts shown per page.</param>
-        /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, Gender gender, int page, int perPage)
-        {
-            String getUrl = String.Format("{0}/{1}/leaderboard?gender={2}&page={3}&per_page={4}&access_token={5}",
-                Endpoints.Leaderboard,
-                segmentId,
-                gender.ToString().Substring(0, 1),
-                page,
-                perPage,
-                Authentication.AccessToken
-                );
-
-            String json = WebRequest.SendGet(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
-        }
-
-        /// <summary>
-        /// Gets the gender-filtered and age-filtered leaderboard of a segment. This method requires the currently authenticated 
-        /// athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// /// <param name="age">The age range used to filter the leaderboard.</param>
-        /// <returns>The leaderboard filtered by gender and age.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, Gender gender, AgeGroup age)
-        {
-            String ageFilter = String.Empty;
-
-            switch (age)
-            {
-                case AgeGroup.One:
-                    ageFilter = "0_24";
-                    break;
-                case AgeGroup.Two:
-                    ageFilter = "25_34";
-                    break;
-                case AgeGroup.Three:
-                    ageFilter = "35_44";
-                    break;
-                case AgeGroup.Four:
-                    ageFilter = "45_54";
-                    break;
-                case AgeGroup.Five:
-                    ageFilter = "55_64";
-                    break;
-                case AgeGroup.Six:
-                    ageFilter = "65_plus";
-                    break;
-            }
-
-            String getUrl = String.Format("{0}/{1}/leaderboard?gender={2}&age_group={3}&filter=age_group&access_token={4}",
-                Endpoints.Leaderboard,
-                segmentId,
-                gender.ToString().Substring(0, 1),
-                ageFilter,
-                Authentication.AccessToken
-                );
-
-            String json = WebRequest.SendGet(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
-        }
-
-        /// <summary>
-        /// Gets the gender-filtered and weight-class filtered leaderboard of a segment. This method requires the currently 
-        /// authenticated  athlete to have a Strava premium account.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment Id.</param>
-        /// <param name="gender">The gender used to filter the leaderboard.</param>
-        /// /// <param name="weight">The weight class used to filter the leaderboard.</param>
-        /// <returns>The leaderboard filtered by gender and weight class.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, Gender gender, WeightClass weight)
-        {
-            String weightClass = String.Empty;
-
-            switch (weight)
-            {
-                case WeightClass.One:
-                    weightClass = "0_54";
-                    break;
-                case WeightClass.Two:
-                    weightClass = "55_64";
-                    break;
-                case WeightClass.Three:
-                    weightClass = "65_74";
-                    break;
-                case WeightClass.Four:
-                    weightClass = "75_84";
-                    break;
-                case WeightClass.Five:
-                    weightClass = "85_94";
-                    break;
-                case WeightClass.Six:
-                    weightClass = "95_plus";
-                    break;
-            }
-
-            String getUrl = String.Format("{0}/{1}/leaderboard?gender={2}&weight_class={3}&filter=weight_class&access_token={4}",
-                Endpoints.Leaderboard,
-                segmentId,
-                gender.ToString().Substring(0, 1),
-                weightClass,
-                Authentication.AccessToken
-                );
-
-            String json = WebRequest.SendGet(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
-        }
-
-        /// <summary>
         /// Gets the number of entries of a segment.
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param>
@@ -736,45 +955,6 @@ namespace com.strava.api.Client
             Leaderboard leaderboard = Unmarshaller<Leaderboard>.Unmarshal(json);
 
             return leaderboard.EffortCount;
-        }
-
-        /// <summary>
-        /// Gets the leaderboard filtered by time.
-        /// </summary>
-        /// <param name="segmentId">The Strava segment id.</param>
-        /// <param name="filter">The time filter.</param>
-        /// <returns>A time filtered leaderboard.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, TimeFilter filter)
-        {
-            String fltr = String.Empty;
-
-            // ‘this_year’, ‘this_month’, ‘this_week’, ‘today’
-            switch (filter)
-            {
-                case TimeFilter.ThisMonth:
-                    fltr = "this_month";
-                    break;
-                case TimeFilter.ThisWeek:
-                    fltr = "this_week";
-                    break;
-                case TimeFilter.ThisYear:
-                    fltr = "this_year";
-                    break;
-                case TimeFilter.Today:
-                    fltr = "today";
-                    break;
-            }
-
-            String getUrl = String.Format("{0}/{1}/leaderboard?filter={2}&access_token={3}",
-                Endpoints.Leaderboard,
-                segmentId,
-                fltr,
-                Authentication.AccessToken
-                );
-
-            String json = WebRequest.SendGet(new Uri(getUrl));
-
-            return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
 
         /// <summary>

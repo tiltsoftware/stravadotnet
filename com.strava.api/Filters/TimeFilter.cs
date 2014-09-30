@@ -17,36 +17,36 @@
 
 #endregion
 
-namespace com.strava.api.Activities
+namespace com.strava.api.Filters
 {
     /// <summary>
-    /// This enum is used to filter a segment leaderboard. You need a Strava premium account to filter segment leaderboards.
+    /// Used to filter a segment leaderboard. Valid values from Strava are:
+    /// this_year
+    /// this_month
+    /// this_week
+    /// today
     /// </summary>
-    public enum WeightClass
+    public enum TimeFilter
     {
         /// <summary>
-        /// 0-124 pounds - 0-54 kg 
+        /// Show efforts from this year.
         /// </summary>
-        One,
+        ThisYear,
         /// <summary>
-        /// 125-149 pounds - 55-64 kg
+        /// Show efforts from this month.
         /// </summary>
-        Two,
+        ThisMonth,
         /// <summary>
-        /// 150-164 pounds - 65-74 kg
+        /// Show efforts from this week.
         /// </summary>
-        Three,
+        ThisWeek,
         /// <summary>
-        /// 165-179 pounds - 75-84kg
+        /// Show efforts from today.
         /// </summary>
-        Four,
+        Today,
         /// <summary>
-        /// 180-199 pounds - 85-94kg
+        /// The leaderboard does not get filtered by date.
         /// </summary>
-        Five,
-        /// <summary>
-        /// 200+ pounds - 95+ kg
-        /// </summary>
-        Six
+        All
     }
 }

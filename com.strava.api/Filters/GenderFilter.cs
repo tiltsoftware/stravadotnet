@@ -17,36 +17,26 @@
 
 #endregion
 
-namespace com.strava.api.Activities
+namespace com.strava.api.Filters
 {
     /// <summary>
-    /// This enum is used to filter a segment leaderboard. A Strava premium account is needed to filter a segment leasderboard.
+    /// Use this enum to filter a Strava segment leaderboard. You can only filter the leaderboard by gender, if you have a Strava 
+    /// premium account. If you do not have one, use the value "Both".
     /// </summary>
-    public enum AgeGroup
+    public enum GenderFilter
     {
         /// <summary>
-        /// 0-24
+        /// Female
         /// </summary>
-        One,
+        Female,
         /// <summary>
-        /// 25-34
+        /// Male
         /// </summary>
-        Two,
+        Male,
         /// <summary>
-        /// 35-44
+        /// Both male and female riders are shown in the leaderboard. Use this value if you do not have a Strava 
+        /// premium account!
         /// </summary>
-        Three,
-        /// <summary>
-        /// 45-54
-        /// </summary>
-        Four,
-        /// <summary>
-        /// 55-64
-        /// </summary>
-        Five,
-        /// <summary>
-        /// 65+
-        /// </summary>
-        Six
+        Both
     }
 }

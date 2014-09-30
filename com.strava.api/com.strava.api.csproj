@@ -53,7 +53,7 @@
     <Compile Include="Activities\ActivitySummary.cs" />
     <Compile Include="Activities\ActivityType.cs" />
     <Compile Include="Activities\ActivityZone.cs" />
-    <Compile Include="Activities\AgeGroup.cs" />
+    <Compile Include="Filters\AgeFilter.cs" />
     <Compile Include="Activities\Comment.cs" />
     <Compile Include="Activities\DistributionBucket.cs" />
     <Compile Include="Activities\Leaderboard.cs" />
@@ -62,8 +62,10 @@
     <Compile Include="Activities\Map.cs" />
     <Compile Include="Activities\Photo.cs" />
     <Compile Include="Activities\ResourceState.cs" />
-    <Compile Include="Activities\TimeFilter.cs" />
-    <Compile Include="Activities\WeightClass.cs" />
+    <Compile Include="Filters\StringConverter.cs" />
+    <Compile Include="Filters\GenderFilter.cs" />
+    <Compile Include="Filters\TimeFilter.cs" />
+    <Compile Include="Filters\WeightFilter.cs" />
     <Compile Include="Activities\Summary.cs" />
     <Compile Include="Api\Endpoints.cs" />
     <Compile Include="Api\Limit.cs" />
