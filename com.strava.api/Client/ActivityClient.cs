@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using com.strava.api.Activities;
 using com.strava.api.Api;
@@ -670,6 +671,36 @@ namespace com.strava.api.Client
             String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityLap>>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Give kudos for the specified activity.
+        /// </summary>
+        /// <param name="activityId">The activity you want to give kudos for.</param>
+        public async void GiveKudos(String activityId)
+        {
+            String postUrl = String.Format("{0}/{1}/kudos?access_token={2}",
+                Endpoints.Activity,
+                activityId,
+                Authentication.AccessToken);
+
+            await Http.WebRequest.SendPostAsync(new Uri(postUrl));
+        }
+
+        /// <summary>
+        /// Post a comment on the specified activity.
+        /// </summary>
+        /// <param name="activityId">The Strava ID of the activity you want to comment.</param>
+        /// <param name="text">The text that will be posted.</param>
+        public async void PostComment(String activityId, String text)
+        {
+            String postUrl = String.Format("{0}/{1}/comments?text={2}&access_token={3}",
+                Endpoints.Activity,
+                activityId,
+                text,
+                Authentication.AccessToken);
+
+            await Http.WebRequest.SendPostAsync(new Uri(postUrl));
         }
 
         #endregion

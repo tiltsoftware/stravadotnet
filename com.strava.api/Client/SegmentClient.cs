@@ -23,7 +23,6 @@ using System.Globalization;
 using System.Threading.Tasks;
 using com.strava.api.Activities;
 using com.strava.api.Api;
-using com.strava.api.Athletes;
 using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Filters;
