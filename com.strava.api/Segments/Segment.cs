@@ -18,7 +18,7 @@
 #endregion
 
 using System;
-using com.strava.api.Activities;
+using com.strava.api.Segments;
 using Newtonsoft.Json;
 
 namespace com.strava.api.Segments

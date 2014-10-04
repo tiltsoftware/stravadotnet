@@ -85,7 +85,7 @@ namespace com.strava.api.Client
         /// <returns>The list of friends of the athlete.</returns>
         public async Task<List<AthleteSummary>> GetFriendsAsync(String athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/friends?access_token={2}", Endpoints.Friends, athleteId, Authentication.AccessToken);
+            String getUrl = String.Format("{0}/{1}/friends?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
             String json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);

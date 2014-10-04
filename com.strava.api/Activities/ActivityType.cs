@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace com.strava.api.Activities
+namespace com.strava.api.Segments
 {
     /// <summary>
     /// The type of an activity.

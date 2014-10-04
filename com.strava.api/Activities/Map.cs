@@ -20,7 +20,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Activities
+namespace com.strava.api.Segments
 {
     /// <summary>
     /// This class contains information about the route of an activity.

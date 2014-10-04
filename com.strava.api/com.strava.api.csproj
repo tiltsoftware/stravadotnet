@@ -56,8 +56,8 @@
     <Compile Include="Filters\AgeFilter.cs" />
     <Compile Include="Activities\Comment.cs" />
     <Compile Include="Activities\DistributionBucket.cs" />
-    <Compile Include="Activities\Leaderboard.cs" />
-    <Compile Include="Activities\LeaderboardEntry.cs" />
+    <Compile Include="Segments\Leaderboard.cs" />
+    <Compile Include="Segments\LeaderboardEntry.cs" />
     <Compile Include="Activities\LeaderboardParameter.cs" />
     <Compile Include="Activities\Map.cs" />
     <Compile Include="Activities\Photo.cs" />
