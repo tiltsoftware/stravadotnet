@@ -857,7 +857,7 @@ namespace com.strava.api.Clients
         /// <returns>A list of segments that are starred by the athlete.</returns>
         public List<SegmentSummary> GetStarredSegments(String athleteId)
         {
-            String getUrl = String.Format("https://www.strava.com/api/v3/athletes/{0}/segments/starred/?access_token={1}", athleteId, Authentication.AccessToken);
+            String getUrl = String.Format("https://www.strava.com/api/v3/athletes/{0}/segments/starred?access_token={1}", athleteId, Authentication.AccessToken);
             String json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentSummary>>.Unmarshal(json);
@@ -869,7 +869,7 @@ namespace com.strava.api.Clients
         /// <returns>A list of segments that are starred by the currently authenticated athlete.</returns>
         public List<SegmentSummary> GetStarredSegments()
         {
-            String getUrl = String.Format("{0}/?access_token={1}", Endpoints.Starred, Authentication.AccessToken);
+            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Starred, Authentication.AccessToken);
             String json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentSummary>>.Unmarshal(json);
