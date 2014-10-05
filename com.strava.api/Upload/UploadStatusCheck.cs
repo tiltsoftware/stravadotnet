@@ -20,7 +20,7 @@
 using System;
 using System.Timers;
 using com.strava.api.Authentication;
-using com.strava.api.Client;
+using com.strava.api.Clients;
 
 namespace com.strava.api.Upload
 {

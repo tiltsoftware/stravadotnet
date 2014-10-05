@@ -28,7 +28,7 @@ using com.strava.api.Common;
 using com.strava.api.Http;
 using com.strava.api.Upload;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// This class contains methods for uploading new activities to Strava. Use the UploadStatusCheck class to 

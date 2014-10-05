@@ -19,7 +19,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using com.strava.api.Segments;
 using com.strava.api.Api;
@@ -28,7 +27,7 @@ using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Utilities;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// Used to get activity data from Strava.

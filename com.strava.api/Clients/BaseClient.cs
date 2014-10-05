@@ -20,7 +20,7 @@
 using System;
 using com.strava.api.Authentication;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// Base class for all the clients except the StravaClient.

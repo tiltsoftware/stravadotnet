@@ -28,7 +28,7 @@ using com.strava.api.Clubs;
 using com.strava.api.Common;
 using com.strava.api.Http;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// Used to receive information about clubs from Strava.

@@ -26,7 +26,7 @@ using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Http;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// Used to receive information about an athlete from Strava.
@@ -72,7 +72,7 @@ namespace com.strava.api.Client
         /// <returns>A list of the friends of the currently authenticated athlete.</returns>
         public async Task<List<AthleteSummary>> GetFriendsAsync()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Friends, Authentication.AccessToken);
+            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Athletes, Authentication.AccessToken);
             String json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
@@ -208,7 +208,7 @@ namespace com.strava.api.Client
         /// <returns>A list of the friends of the currently authenticated athlete.</returns>
         public List<AthleteSummary> GetFriends()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Friends, Authentication.AccessToken);
+            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Athletes, Authentication.AccessToken);
             String json = WebRequest.SendGet(new Uri(getUrl));
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -220,7 +220,7 @@ namespace com.strava.api.Client
         /// <returns>The list of friends of the athlete.</returns>
         public List<AthleteSummary> GetFriends(String athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/friends?access_token={2}", Endpoints.Friends, athleteId, Authentication.AccessToken);
+            String getUrl = String.Format("{0}/{1}/friends?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
             String json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);

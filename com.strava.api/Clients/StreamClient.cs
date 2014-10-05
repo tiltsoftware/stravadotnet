@@ -28,7 +28,7 @@ using com.strava.api.Common;
 using com.strava.api.Http;
 using com.strava.api.Streams;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// Streams is the Strava term for the raw data associated with an activity. 

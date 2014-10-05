@@ -24,7 +24,7 @@ using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Http;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// Used to receive information about gear.

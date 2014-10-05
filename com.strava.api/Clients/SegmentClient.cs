@@ -27,9 +27,8 @@ using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Filters;
 using com.strava.api.Http;
-using com.strava.api.Segments;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// Segments are specific sections of road. Athletes’ times are compared on these segments and leaderboards are created.
@@ -352,7 +351,7 @@ namespace com.strava.api.Client
         /// <returns>A list of segments where the athlete is the record holder.</returns>
         public async Task<List<SegmentEffort>> GetRecordsAsync(String athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athlete, athleteId, Authentication.AccessToken);
+            String getUrl = String.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
             String json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
@@ -846,7 +845,7 @@ namespace com.strava.api.Client
         /// <returns>A list of segments where the athlete is the record holder.</returns>
         public List<SegmentEffort> GetRecords(String athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athlete, athleteId, Authentication.AccessToken);
+            String getUrl = String.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
             String json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);

@@ -26,7 +26,7 @@ using com.strava.api.Common;
 using com.strava.api.Http;
 using com.strava.api.Segments;
 
-namespace com.strava.api.Client
+namespace com.strava.api.Clients
 {
     /// <summary>
     /// The EffortClient class is used to retrieve efforts of an segment.
