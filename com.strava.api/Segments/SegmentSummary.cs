@@ -20,7 +20,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Segments
+namespace com.strava.api.Activities
 {
     /// <summary>
     /// Represents a less detailed version of a segment.
@@ -86,6 +86,30 @@ namespace com.strava.api.Segments
         /// </summary>
         [JsonProperty("climb_category")]
         public int Category { get; set; }
+
+        public ClimbCategory ClimbCategory
+        {
+            get
+            {
+                switch (Category)
+                {
+                    case 0:
+                        return ClimbCategory.CategoryHc;
+                    case 1:
+                        return ClimbCategory.Category4;
+                    case 2:
+                        return ClimbCategory.Category3;
+                    case 3:
+                        return ClimbCategory.Category2;
+                    case 4:
+                        return ClimbCategory.Category1;
+                    case 5:
+                        return ClimbCategory.CategoryNc;
+                    default:
+                        return ClimbCategory.CategoryNc;
+                }
+            }
+        }
 
         /// <summary>
         /// The city where this segment is located in.

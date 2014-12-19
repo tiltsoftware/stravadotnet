@@ -20,12 +20,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using com.strava.api.Segments;
+using com.strava.api.Activities;
 using com.strava.api.Api;
 using com.strava.api.Athletes;
 using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Utilities;
+using System.Globalization;
 
 namespace com.strava.api.Clients
 {
@@ -62,6 +63,47 @@ namespace com.strava.api.Clients
             String getUrl = String.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
             String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
+            return Unmarshaller<Activity>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Creates a manual entry on Strava.
+        /// </summary>
+        /// <param name="name">The name of the activity.</param>
+        /// <param name="type">The type of the activity.</param>
+        /// <param name="dateTime">The time when the activity was started.</param>
+        /// <param name="elapsedSeconds">The elapsed time in seconds.</param>
+        /// <param name="description">The description (otpional).</param>
+        /// <param name="distance">The distance of the activity (optional).</param>
+        public async Task<Activity> CreateActivityAsync(String name, ActivityType type, DateTime dateTime, int elapsedSeconds, String description, float distance = 0f)
+        {
+            String t = type.ToString().ToLower();
+            String timeString = dateTime.ToString("o");
+
+            String postUrl = String.Format("https://www.strava.com/api/v3/activities?name={0}&type={1}&start_date_local={2}&elapsed_time={3}&description={4}&distance={5}&access_token={6}",
+                name, t, timeString, elapsedSeconds, description, distance.ToString(CultureInfo.InvariantCulture), Authentication.AccessToken);
+            
+            String json = await Http.WebRequest.SendPostAsync(new Uri(postUrl));
+            return Unmarshaller<Activity>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Creates a manual entry on Strava.
+        /// </summary>
+        /// <param name="name">The name of the activity.</param>
+        /// <param name="type">The type of the activity.</param>
+        /// <param name="timeString">The time when the activity was started.</param>
+        /// <param name="elapsedSeconds">The elapsed time in seconds.</param>
+        /// <param name="description">The description (otpional).</param>
+        /// <param name="distance">The distance of the activity (optional).</param>
+        public async Task<Activity> CreateActivityAsync(String name, ActivityType type, String timeString, int elapsedSeconds, String description, float distance = 0f)
+        {
+            String t = type.ToString().ToLower();
+
+            String postUrl = String.Format("https://www.strava.com/api/v3/activities?name={0}&type={1}&start_date_local={2}&elapsed_time={3}&description={4}&distance={5}&access_token={6}",
+                name, t, timeString, elapsedSeconds, description, distance.ToString(CultureInfo.InvariantCulture), Authentication.AccessToken);
+
+            String json = await Http.WebRequest.SendPostAsync(new Uri(postUrl));
             return Unmarshaller<Activity>.Unmarshal(json);
         }
 
@@ -718,7 +760,7 @@ namespace com.strava.api.Clients
             String json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
-        }
+        }        
 
         /// <summary>
         /// Gets all the activities recorded before the specified date from Strava.

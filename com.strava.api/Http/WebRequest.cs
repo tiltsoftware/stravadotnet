@@ -142,7 +142,7 @@ namespace com.strava.api.Http
                         }
 
                         //Request was successful
-                        if (response.StatusCode == HttpStatusCode.OK)
+                        if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
                         {
                             return await response.Content.ReadAsStringAsync();
                         }

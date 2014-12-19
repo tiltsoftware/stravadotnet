@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using com.strava.api.Common;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Segments
+namespace com.strava.api.Activities
 {
     /// <summary>
     /// A single segment returned from the segment explorer.
