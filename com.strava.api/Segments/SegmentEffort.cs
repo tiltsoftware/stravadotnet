@@ -22,7 +22,7 @@ using com.strava.api.Activities;
 using com.strava.api.Athletes;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Activities
+namespace com.strava.api.Segments
 {
     /// <summary>
     /// A segment effort represents an athlete’s attempt at a segment. It can also be 
@@ -122,10 +122,28 @@ namespace com.strava.api.Activities
         public String StartDate { get; set; }
 
         /// <summary>
-        /// Local start date and time.
+        /// Returns the StartDate-Property as a DateTime object.
         /// </summary>
-        [JsonProperty("start_date_local")]
-        public String StartDateLocal { get; set; }
+        public DateTime DateTimeStart
+        {
+            get { return DateTime.Parse(StartDate); }
+        }
+
+        /// <summary>
+        /// Returns the moving time as a TimeSpan object rather than an int value.
+        /// </summary>
+        public TimeSpan MovingTimeSpan
+        {
+            get { return TimeSpan.FromSeconds(MovingTime); }
+        }
+
+        /// <summary>
+        /// Returns the elapsed time as a TimeSpan object rather than an int value.
+        /// </summary>
+        public TimeSpan ElapsedTimeSpan
+        {
+            get { return TimeSpan.FromSeconds(ElapsedTime); }
+        }
 
         /// <summary>
         /// Distance in meters.

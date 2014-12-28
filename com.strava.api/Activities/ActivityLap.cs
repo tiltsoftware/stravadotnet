@@ -70,6 +70,22 @@ namespace com.strava.api.Activities
         [JsonProperty("moving_time")]
         public int MovingTime { get; set; }
 
+        /// <summary>
+        /// Returns the moving time as a TimeSpan object rather than an int value.
+        /// </summary>
+        public TimeSpan MovingTimeSpan
+        {
+            get { return TimeSpan.FromSeconds(MovingTime); }
+        }
+
+        /// <summary>
+        /// Returns the elapsed time as a TimeSpan object rather than an int value.
+        /// </summary>
+        public TimeSpan ElapsedTimeSpan
+        {
+            get { return TimeSpan.FromSeconds(ElapsedTime); }
+        }
+
         [JsonProperty("start_date")]
         private String _start;
 

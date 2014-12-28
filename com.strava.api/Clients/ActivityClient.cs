@@ -244,7 +244,8 @@ namespace com.strava.api.Clients
         /// <param name="activityId">The Strava Id of the activity to delete.</param>
         public async void DeleteActivity(String activityId)
         {
-            String deleteUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Activities, activityId, Authentication.AccessToken);
+
+            String deleteUrl = String.Format("https://www.strava.com/api/v3/activities/{0}?access_token={1}", activityId, Authentication.AccessToken);
 
             await Http.WebRequest.SendDeleteAsync(new Uri(deleteUrl));
         }

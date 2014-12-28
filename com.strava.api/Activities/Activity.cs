@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using com.strava.api.Gear;
+using com.strava.api.Segments;
 using Newtonsoft.Json;
 
 namespace com.strava.api.Activities

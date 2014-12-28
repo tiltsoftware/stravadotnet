@@ -88,6 +88,38 @@ namespace com.strava.api.Activities
         public String StartDateLocal { get; set; }
 
         /// <summary>
+        /// Returns the StartDate-Property as a DateTime object.
+        /// </summary>
+        public DateTime DateTimeStart
+        {
+            get { return DateTime.Parse(StartDate); }
+        }
+
+        /// <summary>
+        /// Returns the StartDateLocal-Property as a DateTime object.
+        /// </summary>
+        public DateTime DateTimeStartLocal
+        {
+            get { return DateTime.Parse(StartDateLocal); }
+        }
+
+        /// <summary>
+        /// Returns the moving time as a TimeSpan object rather than an int value.
+        /// </summary>
+        public TimeSpan MovingTimeSpan
+        {
+            get { return TimeSpan.FromSeconds(MovingTime); }
+        }
+
+        /// <summary>
+        /// Returns the elapsed time as a TimeSpan object rather than an int value.
+        /// </summary>
+        public TimeSpan ElapsedTimeSpan
+        {
+            get { return TimeSpan.FromSeconds(ElapsedTime); }
+        }
+
+        /// <summary>
         /// The activity id. use this id to load additional information about the activity.
         /// </summary>
         [JsonProperty("activity_id")]

@@ -25,6 +25,7 @@ using com.strava.api.Authentication;
 using com.strava.api.Common;
 using com.strava.api.Http;
 using com.strava.api.Activities;
+using com.strava.api.Segments;
 
 namespace com.strava.api.Clients
 {

@@ -132,6 +132,26 @@ namespace com.strava.api.Clients
         }
 
         /// <summary>
+        /// Join a Strava Club.
+        /// </summary>
+        /// <param name="clubId">The Strava Id of the club you want to join.</param>
+        public async void JoinClub(String clubId)
+        {
+            String postUrl = String.Format("https://www.strava.com/api/v3/clubs/{0}/join?access_token={1}", clubId, Authentication.AccessToken);
+            await WebRequest.SendPostAsync(new Uri(postUrl));
+        }
+
+        /// <summary>
+        /// Leave a Strava Club.
+        /// </summary>
+        /// <param name="clubId">The Strava Id of the club you want to leave.</param>
+        public async void LeaveClub(String clubId)
+        {
+            String postUrl = String.Format("https://www.strava.com/api/v3/clubs/{0}/leave?access_token={1}", clubId, Authentication.AccessToken);
+            await WebRequest.SendPostAsync(new Uri(postUrl));
+        }
+
+        /// <summary>
         /// Gets a list of clubs in which the currently authenticated athlete is a member of.
         /// </summary>
         /// <returns>The list of clubs in which the currently authenticated user is a member of.</returns>

@@ -22,7 +22,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Cache;
 using System.Net.Http;
+using System.Reflection.Emit;
+using System.Security;
 using System.Threading.Tasks;
 using com.strava.api.Api;
 
@@ -33,6 +36,10 @@ namespace com.strava.api.Http
     /// </summary>
     public static class WebRequest
     {
+        /// <summary>
+        /// The Response Code that was received on the last request.
+        /// </summary>
+        public static HttpStatusCode LastResponseCode { get; set; }
         /// <summary>
         /// AsyncResponseReceived is raised when an asynchronous response is received from the server.
         /// </summary>
@@ -89,6 +96,7 @@ namespace com.strava.api.Http
                                     Int32.Parse(limit.Value.ElementAt(0).Split(',')[1]));
                             }
 
+                            LastResponseCode = response.StatusCode;
                             return await response.Content.ReadAsStringAsync();
                         }
                     }
@@ -122,7 +130,8 @@ namespace com.strava.api.Http
                         }
 
                         //Getting the Strava API usage data.
-                        KeyValuePair<String, IEnumerable<String>> usage = response.Headers.ToList().Find(x => x.Key.Equals("X-RateLimit-Usage"));
+                        KeyValuePair<String, IEnumerable<String>> usage =
+                            response.Headers.ToList().Find(x => x.Key.Equals("X-RateLimit-Usage"));
 
                         if (usage.Value != null)
                         {
@@ -132,7 +141,8 @@ namespace com.strava.api.Http
                         }
 
                         //Getting the Strava API limits
-                        KeyValuePair<String, IEnumerable<String>> limit = response.Headers.ToList().Find(x => x.Key.Equals("X-RateLimit-Limit"));
+                        KeyValuePair<String, IEnumerable<String>> limit =
+                            response.Headers.ToList().Find(x => x.Key.Equals("X-RateLimit-Limit"));
 
                         if (limit.Value != null)
                         {
@@ -142,10 +152,8 @@ namespace com.strava.api.Http
                         }
 
                         //Request was successful
-                        if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
-                        {
-                            return await response.Content.ReadAsStringAsync();
-                        }
+                        LastResponseCode = response.StatusCode;
+                        return await response.Content.ReadAsStringAsync();
                     }
                 }
             }
@@ -196,11 +204,8 @@ namespace com.strava.api.Http
                                 Int32.Parse(limit.Value.ElementAt(0).Split(',')[1]));
                         }
 
-                        //Request was successful
-                        if (response.StatusCode == HttpStatusCode.OK)
-                        {
-                            return await response.Content.ReadAsStringAsync();
-                        }
+                        LastResponseCode = response.StatusCode;
+                        return await response.Content.ReadAsStringAsync();
                     }
                 }
             }
@@ -251,12 +256,9 @@ namespace com.strava.api.Http
                             Limits.Limit = new Limit(Int32.Parse(limit.Value.ElementAt(0).Split(',')[0]),
                                 Int32.Parse(limit.Value.ElementAt(0).Split(',')[1]));
                         }
-
-                        //Request was successful
-                        if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.NoContent)
-                        {
-                            return await response.Content.ReadAsStringAsync();
-                        }
+                        
+                        LastResponseCode = response.StatusCode;
+                        return await response.Content.ReadAsStringAsync();
                     }
                 }
             }

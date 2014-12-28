@@ -18,9 +18,10 @@
 #endregion
 
 using System;
+using com.strava.api.Activities;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Activities
+namespace com.strava.api.Segments
 {
     /// <summary>
     /// Represents a Strava segment.
