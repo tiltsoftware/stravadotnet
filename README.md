@@ -3,7 +3,7 @@ Strava.NET
 
 NOTE: Visit the new homepage at www.sascha-simon.com for more information and updates on the Strava Client using the framework.
 
-Current version: 3.0.0 (09/30/2014)
+Current version: 3.0.4 (12/27/2014)
 
 You can now check out the Samples-Project: [Samples-project on GitHub](https://github.com/inexcitus/stravasamples)
 
