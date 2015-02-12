@@ -53,6 +53,7 @@
     <Compile Include="Activities\ActivitySummary.cs" />
     <Compile Include="Activities\ActivityType.cs" />
     <Compile Include="Activities\ActivityZone.cs" />
+    <Compile Include="Clients\StatsClient.cs" />
     <Compile Include="Filters\AgeFilter.cs" />
     <Compile Include="Activities\Comment.cs" />
     <Compile Include="Activities\DistributionBucket.cs" />
@@ -116,6 +117,13 @@
     <Compile Include="Segments\ClimbCategory.cs" />
     <Compile Include="Segments\ExplorerResult.cs" />
     <Compile Include="Segments\ExplorerSegment.cs" />
+    <Compile Include="Statistics\AllRideTotals.cs" />
+    <Compile Include="Statistics\AllRunTotals.cs" />
+    <Compile Include="Statistics\RecentRideTotals.cs" />
+    <Compile Include="Statistics\RecentRunTotals.cs" />
+    <Compile Include="Statistics\Stats.cs" />
+    <Compile Include="Statistics\YearToDateRideTotals.cs" />
+    <Compile Include="Statistics\YearToDateRunTotals.cs" />
     <Compile Include="Streams\SegmentEffortStream.cs" />
     <Compile Include="Upload\CheckStatus.cs" />
     <Compile Include="Upload\CurrentUploadStatus.cs" />

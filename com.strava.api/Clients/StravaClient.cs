@@ -49,6 +49,9 @@ namespace com.strava.api.Clients
     ///     <term>Segment Efforts</term>
     /// </item>
     /// <item>
+    ///     <term>Stats</term>
+    /// </item>
+    /// <item>
     ///     <term>Streams</term>
     /// </item>
     /// </list>
@@ -77,6 +80,7 @@ namespace com.strava.api.Clients
                 Streams = new StreamClient(authenticator);
                 Uploads = new UploadClient(authenticator);
                 Efforts = new EffortClient(authenticator);
+                Stats = new StatsClient(authenticator);
             }
             else
             {
@@ -115,6 +119,11 @@ namespace com.strava.api.Clients
         /// Predefined StreamClient.
         /// </summary>
         public StreamClient Streams { get; set; }
+
+        /// <summary>
+        /// Predefined StatsClient.
+        /// </summary>
+        public StatsClient Stats { get; set; }
 
         /// <summary>
         /// The UploadClient is used to upload new activities to Strava.
