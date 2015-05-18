@@ -1,11 +1,22 @@
-﻿namespace com.strava.api.Statistics
+﻿using Newtonsoft.Json;
+
+namespace com.strava.api.Statistics
 {
     public class AllRunTotals
     {
-        public int count { get; set; }
-        public int distance { get; set; }
-        public int moving_time { get; set; }
-        public int elapsed_time { get; set; }
-        public int elevation_gain { get; set; }
+        [JsonProperty("count")]
+        public int Count { get; set; }
+
+        [JsonProperty("distance")]
+        public int Distance { get; set; }
+
+        [JsonProperty("moving_time")]
+        public int MovingTime { get; set; }
+
+        [JsonProperty("elapsed_time")]
+        public int ElapsedTime { get; set; }
+
+        [JsonProperty("elevation_gain")]
+        public int ElevationGain { get; set; }
     }
 }

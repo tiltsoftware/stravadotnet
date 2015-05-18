@@ -1,12 +1,46 @@
-﻿namespace com.strava.api.Statistics
+﻿using Newtonsoft.Json;
+
+namespace com.strava.api.Statistics
 {
+    /// <summary>
+    /// Run totals of the past four weeks.
+    /// </summary>
     public class RecentRunTotals
     {
-        public int count { get; set; }
-        public double distance { get; set; }
-        public int moving_time { get; set; }
-        public int elapsed_time { get; set; }
-        public double elevation_gain { get; set; }
-        public int achievement_count { get; set; }
+        /// <summary>
+        /// Number of activities.
+        /// </summary>
+        [JsonProperty("count")]
+        public int Count { get; set; }
+
+        /// <summary>
+        /// Total distance.
+        /// </summary>
+        [JsonProperty("distance")]
+        public double Distance { get; set; }
+
+        /// <summary>
+        /// Moving time.
+        /// </summary>
+        [JsonProperty("moving_time")]
+        public int MovingTime { get; set; }
+
+        /// <summary>
+        /// Elapsed time.
+        /// </summary>
+        [JsonProperty("elapsed_time")]
+        public int ElapsedTime { get; set; }
+
+        /// <summary>
+        /// Elevation gain in metres.
+        /// </summary>
+        [JsonProperty("elevation_gain")]
+        public double ElevationGain { get; set; }
+
+        /// <summary>
+        /// Achievement count.
+        /// </summary>
+        [JsonProperty("achievement_count")]
+        public int AchievementCount { get; set; }
     }
 }
