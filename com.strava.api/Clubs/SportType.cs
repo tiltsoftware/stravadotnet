@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace com.strava.api.Clubs
+namespace Strava.Clubs
 {
     /// <summary>
     /// Used by the Club class.

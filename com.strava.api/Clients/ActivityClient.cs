@@ -20,15 +20,15 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using com.strava.api.Activities;
-using com.strava.api.Api;
-using com.strava.api.Athletes;
-using com.strava.api.Authentication;
-using com.strava.api.Common;
-using com.strava.api.Utilities;
+using Strava.Activities;
+using Strava.Api;
+using Strava.Athletes;
+using Strava.Authentication;
+using Strava.Common;
+using Strava.Utilities;
 using System.Globalization;
 
-namespace com.strava.api.Clients
+namespace Strava.Clients
 {
     /// <summary>
     /// Used to get activity data from Strava.

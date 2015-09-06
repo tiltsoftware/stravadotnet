@@ -27,9 +27,9 @@ using System.Net.Http;
 using System.Reflection.Emit;
 using System.Security;
 using System.Threading.Tasks;
-using com.strava.api.Api;
+using Strava.Api;
 
-namespace com.strava.api.Http
+namespace Strava.Http
 {
     /// <summary>
     /// Class to create web requests and receive a response from the server.

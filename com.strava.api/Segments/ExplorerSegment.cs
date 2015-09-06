@@ -18,10 +18,10 @@
 #endregion
 
 using System.Collections.Generic;
-using com.strava.api.Common;
+using Strava.Common;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Activities
+namespace Strava.Activities
 {
     /// <summary>
     /// A single segment returned from the segment explorer.

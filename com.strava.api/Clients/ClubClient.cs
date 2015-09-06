@@ -20,15 +20,15 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using com.strava.api.Activities;
-using com.strava.api.Api;
-using com.strava.api.Athletes;
-using com.strava.api.Authentication;
-using com.strava.api.Clubs;
-using com.strava.api.Common;
-using com.strava.api.Http;
+using Strava.Activities;
+using Strava.Api;
+using Strava.Athletes;
+using Strava.Authentication;
+using Strava.Clubs;
+using Strava.Common;
+using Strava.Http;
 
-namespace com.strava.api.Clients
+namespace Strava.Clients
 {
     /// <summary>
     /// Used to receive information about clubs from Strava.
@@ -205,6 +205,22 @@ namespace com.strava.api.Clients
                 perPage,
                 Authentication.AccessToken);
             String json = WebRequest.SendGet(new Uri(getUrl));
+
+            return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
+        }
+
+        /// <summary>
+        /// Gets a list of all the events of a specified club.
+        /// </summary>
+        /// <param name="clubId"></param>
+        /// <returns></returns>
+        public List<ActivitySummary> GetClubEvents(string clubId)
+        {
+            string getUrl = string.Format("{0}/{1}/group_events?access_token={2}",
+                Endpoints.Club,
+                clubId,
+                Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }

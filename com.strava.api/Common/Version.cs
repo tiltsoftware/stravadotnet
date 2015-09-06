@@ -20,7 +20,7 @@
 using System;
 using System.Reflection;
 
-namespace com.strava.api.Common
+namespace Strava.Common
 {
     /// <summary>
     /// Contains information about the framework.

@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace com.strava.api.Authentication
+namespace Strava.Authentication
 {
     /// <summary>
     /// Used to specify what data from Strava can be received by your application.

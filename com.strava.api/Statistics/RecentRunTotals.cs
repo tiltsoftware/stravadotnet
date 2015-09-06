@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace com.strava.api.Statistics
+namespace Strava.Statistics
 {
     /// <summary>
     /// Run totals of the past four weeks.

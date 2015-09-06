@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace com.strava.api.Upload
+namespace Strava.Upload
 {
     /// <summary>
     /// Indicates the status of an upload.

@@ -20,7 +20,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Common
+namespace Strava.Common
 {
     /// <summary>
     /// COnverts a Json string to an object.

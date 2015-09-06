@@ -19,7 +19,7 @@
 
 using System;
 
-namespace com.strava.api.Api
+namespace Strava.Api
 {
     /// <summary>
     /// This class contains information about the Strava API limits and how much requests are consumed by your application.

@@ -20,10 +20,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using com.strava.api.Athletes;
+using Strava.Athletes;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Activities
+namespace Strava.Activities
 {
     /// <summary>
     /// Represents a less detailed version of an activity.
@@ -61,6 +61,12 @@ namespace com.strava.api.Activities
         /// </summary>
         [JsonProperty("distance")]
         public float Distance { get; set; }
+
+        /// <summary>
+        /// Total number of photos (uploaded by the user and Instagram).
+        /// </summary>
+        [JsonProperty("total_photo_count")]
+        public int TotalPhotoCount { get; set; }
 
         /// <summary>
         /// Time in movement in seconds.

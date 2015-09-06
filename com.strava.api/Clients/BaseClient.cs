@@ -18,9 +18,9 @@
 #endregion
 
 using System;
-using com.strava.api.Authentication;
+using Strava.Authentication;
 
-namespace com.strava.api.Clients
+namespace Strava.Clients
 {
     /// <summary>
     /// Base class for all the clients except the StravaClient.

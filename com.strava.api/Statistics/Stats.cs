@@ -19,7 +19,7 @@
 
 using Newtonsoft.Json;
 
-namespace com.strava.api.Statistics
+namespace Strava.Statistics
 {
     public class Stats
     {

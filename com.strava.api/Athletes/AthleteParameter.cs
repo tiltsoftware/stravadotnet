@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace com.strava.api.Athletes
+namespace Strava.Athletes
 {
     /// <summary>
     /// Use this enum to specifiy which parameter of an athlete you want to update.

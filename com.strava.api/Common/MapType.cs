@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace com.strava.api.Common
+namespace Strava.Common
 {
     /// <summary>
     /// Choose a Google Maps map type.

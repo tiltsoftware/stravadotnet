@@ -19,7 +19,7 @@
 
 using System;
 
-namespace com.strava.api.Authentication
+namespace Strava.Authentication
 {
     /// <summary>
     /// This class contains information about an auth token received from Strava.

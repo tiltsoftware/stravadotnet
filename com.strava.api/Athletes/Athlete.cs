@@ -19,11 +19,11 @@
 
 using System;
 using System.Collections.Generic;
-using com.strava.api.Clubs;
-using com.strava.api.Gear;
+using Strava.Clubs;
+using Strava.Gear;
 using Newtonsoft.Json;
 
-namespace com.strava.api.Athletes
+namespace Strava.Athletes
 {
     /// <summary>
     /// Represents a Strava athlete.
@@ -89,5 +89,11 @@ namespace com.strava.api.Athletes
         /// </summary>
         [JsonProperty("clubs")]
         public List<Club> Clubs { get; set; }
+
+        /// <summary>
+        /// athlete’s default sport type: 0 = cyclist, 1 = runner
+        /// </summary>
+        [JsonProperty("athlete_type")]
+        public int AthleteType { get; set; }
     }
 }

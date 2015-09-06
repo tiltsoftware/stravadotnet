@@ -1,4 +1,4 @@
-﻿namespace com.strava.api.Statistics
+﻿namespace Strava.Statistics
 {
     public class RecentRideTotals
     {

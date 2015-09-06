@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace com.strava.api.Gear
+namespace Strava.Gear
 {
     /// <summary>
     /// This class represents a pair of shoes.

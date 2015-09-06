@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace com.strava.api.Common
+namespace Strava.Common
 {
     /// <summary>
     /// Decode a polyline to a list of coordinates.
