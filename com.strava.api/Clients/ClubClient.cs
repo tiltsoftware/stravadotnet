@@ -214,7 +214,7 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="clubId"></param>
         /// <returns></returns>
-        public List<ActivitySummary> GetClubEvents(string clubId)
+        public List<ClubEvent> GetClubEvents(string clubId)
         {
             string getUrl = string.Format("{0}/{1}/group_events?access_token={2}",
                 Endpoints.Club,
@@ -222,7 +222,7 @@ namespace Strava.Clients
                 Authentication.AccessToken);
             string json = WebRequest.SendGet(new Uri(getUrl));
 
-            return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
+            return Unmarshaller<List<ClubEvent>>.Unmarshal(json);
         }
 
         #endregion
