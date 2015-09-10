@@ -17,7 +17,6 @@
 
 #endregion
 
-using System;
 using Strava.Athletes;
 using Newtonsoft.Json;
 
@@ -50,7 +49,7 @@ namespace Strava.Activities
         /// The comment's text.
         /// </summary>
         [JsonProperty("text")]
-        public String Text { get; set; }
+        public string Text { get; set; }
 
         /// <summary>
         /// The athlete who wrote the comment.
@@ -62,6 +61,6 @@ namespace Strava.Activities
         /// The time when the comment was crated.
         /// </summary>
         [JsonProperty("created_at")]
-        public String TimeCreated { get; set; }
+        public string TimeCreated { get; set; }
     }
 }

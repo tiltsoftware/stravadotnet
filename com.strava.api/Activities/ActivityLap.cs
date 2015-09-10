@@ -44,7 +44,7 @@ namespace Strava.Activities
         /// The name of the lap.
         /// </summary>
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Contains basic information about the activity.
@@ -87,7 +87,7 @@ namespace Strava.Activities
         }
 
         [JsonProperty("start_date")]
-        private String _start;
+        private string _start;
 
         /// <summary>
         /// The date and time when the lap was started.
@@ -103,7 +103,7 @@ namespace Strava.Activities
             }
         }
 
-        private String _startLocal;
+        private string _startLocal;
 
         /// <summary>
         /// The local date and time when the lap was started.
@@ -113,7 +113,7 @@ namespace Strava.Activities
         {
             get
             {
-                if (!String.IsNullOrEmpty(_startLocal))
+                if (!string.IsNullOrEmpty(_startLocal))
                     return DateTime.Parse(_startLocal);
 
                 return DateTime.MinValue;

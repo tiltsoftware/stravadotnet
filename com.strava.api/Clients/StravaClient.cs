@@ -143,7 +143,7 @@ namespace Strava.Clients
         /// <returns>The version number of the StravaClient.</returns>
         public override string ToString()
         {
-            return String.Format("StravaClient Version {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            return string.Format("StravaClient Version {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
     }
 }

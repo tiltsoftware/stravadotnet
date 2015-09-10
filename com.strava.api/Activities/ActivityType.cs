@@ -24,69 +24,35 @@ namespace Strava.Activities
     /// </summary>
     public enum ActivityType
     {
-        /// <summary>
-        /// Ride
-        /// </summary>
         Ride,
-        /// <summary>
-        /// Run
-        /// </summary>
         Run,
-        /// <summary>
-        /// Swim
-        /// </summary>
         Swim,
-        /// <summary>
-        /// Hike
-        /// </summary>
         Hike,
-        /// <summary>
-        /// Walk
-        /// </summary>
         Walk,
-        /// <summary>
-        /// Nordic Ski
-        /// </summary>
-        NordicSki,
-        /// <summary>
-        /// Alpine Ski
-        /// </summary>
         AlpineSki,
-        /// <summary>
-        /// Backcountry Ski
-        /// </summary>
         BackcountrySki,
-        /// <summary>
-        /// Ice Skate
-        /// </summary>
-        IceSkate,
-        /// <summary>
-        /// Inline Skate
-        /// </summary>
+        Canoeing,
+        CrossCountrySkiing,
+        Crossfit,
+        EBikeRide,
+        Elliptical,
+        Iceskate,
         InlineSkate,
-        /// <summary>
-        /// Kite Surf
-        /// </summary>
+        Kayaking,
         Kitesurf,
-        /// <summary>
-        /// Roller Ski
-        /// </summary>
+        NordicSki,
+        RockClimbing,
         RollerSki,
-        /// <summary>
-        /// Windsurf
-        /// </summary>
-        Windsurf,
-        /// <summary>
-        /// Workout
-        /// </summary>
-        Workout,
-        /// <summary>
-        /// Snowboard
-        /// </summary>
+        Rowing,
         Snowboard,
-        /// <summary>
-        /// Snowshoe
-        /// </summary>
-        Snowshoe
+        Snowshoe,
+        StairStepper,
+        StandUpPaddling,
+        Surfing,
+        VirtualRide,
+        WeightTraining,
+        Windsurf,
+        Workout,
+        Yoga
     }
 }

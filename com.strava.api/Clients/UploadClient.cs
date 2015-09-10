@@ -51,9 +51,10 @@ namespace Strava.Clients
         /// <param name="dataFormat">The format of the file.</param>
         /// <param name="activityType">The type of the activity.</param>
         /// <returns>The status of the upload.</returns>
-        public async Task<UploadStatus> UploadActivityAsync(String filePath, DataFormat dataFormat, ActivityType activityType = ActivityType.Ride)
+        public async Task<UploadStatus> UploadActivityAsync(string filePath, DataFormat dataFormat, ActivityType activityType = ActivityType.Ride, bool isCommute = false)
         {
-            String format = String.Empty;
+            string format = string.Empty;
+            int commuteRide = isCommute ? 1 : 0;
 
             switch (dataFormat)
             {
@@ -87,12 +88,11 @@ namespace Strava.Clients
             content.Add(new ByteArrayContent(File.ReadAllBytes(info.FullName)), "file", info.Name);
 
             HttpResponseMessage result = await client.PostAsync(
-                String.Format("https://www.strava.com/api/v3/uploads?data_type={0}&activity_type={1}",
-                format,
-                activityType.ToString().ToLower()),
+                string.Format("https://www.strava.com/api/v3/uploads?data_type={0}&activity_type={1}&commute={2}",
+                format, activityType.ToString().ToLower(), commuteRide),
                 content);
 
-            String json = await result.Content.ReadAsStringAsync();
+            string json = await result.Content.ReadAsStringAsync();
 
             return Unmarshaller<UploadStatus>.Unmarshal(json);
         }
@@ -102,10 +102,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="uploadId">The id of the upload.</param>
         /// <returns>The status of the upload.</returns>
-        public async Task<UploadStatus> CheckUploadStatusAsync(String uploadId)
+        public async Task<UploadStatus> CheckUploadStatusAsync(string uploadId)
         {
-            String checkUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Uploads, uploadId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(checkUrl));
+            string checkUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Uploads, uploadId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(checkUrl));
 
             return Unmarshaller<UploadStatus>.Unmarshal(json);
         }
@@ -119,10 +119,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="uploadId">The id of the upload.</param>
         /// <returns>The status of the upload.</returns>
-        public UploadStatus CheckUploadStatus(String uploadId)
+        public UploadStatus CheckUploadStatus(string uploadId)
         {
-            String checkUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Uploads, uploadId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(checkUrl));
+            string checkUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Uploads, uploadId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(checkUrl));
 
             return Unmarshaller<UploadStatus>.Unmarshal(json);
         }

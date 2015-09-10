@@ -17,7 +17,6 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
 using Strava.Gear;
 using Strava.Segments;
@@ -52,6 +51,6 @@ namespace Strava.Activities
         /// The activity's description.
         /// </summary>
         [JsonProperty("description")]
-        public String Description { get; set; }
+        public string Description { get; set; }
     }
 }
