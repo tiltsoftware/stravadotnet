@@ -53,11 +53,13 @@
     <Compile Include="Activities\ActivitySummary.cs" />
     <Compile Include="Activities\ActivityType.cs" />
     <Compile Include="Activities\ActivityZone.cs" />
+    <Compile Include="Clients\RouteClient.cs" />
     <Compile Include="Clients\StatsClient.cs" />
     <Compile Include="Clubs\ClubEvent.cs" />
     <Compile Include="Filters\AgeFilter.cs" />
     <Compile Include="Activities\Comment.cs" />
     <Compile Include="Activities\DistributionBucket.cs" />
+    <Compile Include="Routes\Route.cs" />
     <Compile Include="Segments\Leaderboard.cs" />
     <Compile Include="Segments\LeaderboardEntry.cs" />
     <Compile Include="Activities\LeaderboardParameter.cs" />
@@ -148,6 +150,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

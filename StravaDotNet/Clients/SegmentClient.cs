@@ -1,4 +1,4 @@
-﻿#region Copyright (C) 2014 Sascha Simon
+﻿#region Copyright (C) 2014-2015 Sascha Simon
 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ namespace Strava.Clients
         /// <param name="time">The time used to filter the leaderboard.</param> 
         /// <param name="gender">The gender used to filter the leaderboard.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(string segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
         {
             int page = 1;
 
@@ -94,51 +94,51 @@ namespace Strava.Clients
         /// <param name="page">The result page.</param>
         /// <param name="perPage">Efforts shown per page.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(string segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
         {
             bool useGender = false;
             bool useTime = false;
             bool useAge = false;
             bool useWeight = false;
-            String genderFilter = String.Empty;
-            String timeFilter = String.Empty;
-            String ageFilter = String.Empty;
-            String weightFilter = String.Empty;
+            string genderFilter = string.Empty;
+            string timeFilter = string.Empty;
+            string ageFilter = string.Empty;
+            string weightFilter = string.Empty;
 
-            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            if (!string.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
             {
-                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                genderFilter = string.Format("gender={0}", StringConverter.GenderFilterToString(gender));
                 useGender = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            if (!string.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
             {
-                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                timeFilter = string.Format("date_range={0}", StringConverter.TimeFilterToString(time));
                 useTime = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            if (!string.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
             {
-                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                ageFilter = string.Format("age_group={0}", StringConverter.AgeFilterToString(age));
                 useAge = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            if (!string.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
             {
-                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                weightFilter = string.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
                 useWeight = true;
             }
 
-            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&page={6}&per_page={7}&access_token={8}",
+            string getUrl = string.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&page={6}&per_page={7}&access_token={8}",
                 Endpoints.Leaderboard,
                 segmentId,
-                useGender ? genderFilter : String.Empty,
-                useTime ? timeFilter : String.Empty,
-                useAge ? ageFilter : String.Empty,
-                useWeight ? weightFilter : String.Empty,
+                useGender ? genderFilter : string.Empty,
+                useTime ? timeFilter : string.Empty,
+                useAge ? ageFilter : string.Empty,
+                useWeight ? weightFilter : string.Empty,
                 page,
                 perPage,
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -154,7 +154,7 @@ namespace Strava.Clients
         /// <param name="time">The time used to filter the leaderboard.</param> 
         /// <param name="gender">The gender used to filter the leaderboard.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(string segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
         {
             int page = 1;
 
@@ -194,52 +194,52 @@ namespace Strava.Clients
         /// <param name="page">The result page.</param>
         /// <param name="perPage">Efforts shown per page.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(string segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
         {
             bool useGender = false;
             bool useTime = false;
             bool useAge = false;
             bool useWeight = false;
-            String genderFilter = String.Empty;
-            String timeFilter = String.Empty;
-            String ageFilter = String.Empty;
-            String weightFilter = String.Empty;
+            string genderFilter = string.Empty;
+            string timeFilter = string.Empty;
+            string ageFilter = string.Empty;
+            string weightFilter = string.Empty;
 
-            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            if (!string.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
             {
-                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                genderFilter = string.Format("gender={0}", StringConverter.GenderFilterToString(gender));
                 useGender = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            if (!string.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
             {
-                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                timeFilter = string.Format("date_range={0}", StringConverter.TimeFilterToString(time));
                 useTime = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            if (!string.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
             {
-                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                ageFilter = string.Format("age_group={0}", StringConverter.AgeFilterToString(age));
                 useAge = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            if (!string.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
             {
-                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                weightFilter = string.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
                 useWeight = true;
             }
 
-            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&club_id={6}&page={7}&per_page={8}&access_token={9}",
+            string getUrl = string.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&club_id={6}&page={7}&per_page={8}&access_token={9}",
                 Endpoints.Leaderboard,
                 segmentId,
-                useGender ? genderFilter : String.Empty,
-                useTime ? timeFilter : String.Empty,
-                useAge ? ageFilter : String.Empty,
-                useWeight ? weightFilter : String.Empty,
+                useGender ? genderFilter : string.Empty,
+                useTime ? timeFilter : string.Empty,
+                useAge ? ageFilter : string.Empty,
+                useWeight ? weightFilter : string.Empty,
                 clubId,
                 page,
                 perPage,
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -255,7 +255,7 @@ namespace Strava.Clients
         /// <param name="time">The time used to filter the leaderboard.</param> 
         /// <param name="gender">The gender used to filter the leaderboard.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(string segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
         {
             int page = 1;
 
@@ -295,52 +295,52 @@ namespace Strava.Clients
         /// <param name="page">The result page.</param>
         /// <param name="perPage">Efforts shown per page.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(string segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
         {
             bool useGender = false;
             bool useTime = false;
             bool useAge = false;
             bool useWeight = false;
-            String genderFilter = String.Empty;
-            String timeFilter = String.Empty;
-            String ageFilter = String.Empty;
-            String weightFilter = String.Empty;
+            string genderFilter = string.Empty;
+            string timeFilter = string.Empty;
+            string ageFilter = string.Empty;
+            string weightFilter = string.Empty;
 
-            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            if (!string.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
             {
-                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                genderFilter = string.Format("gender={0}", StringConverter.GenderFilterToString(gender));
                 useGender = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            if (!string.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
             {
-                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                timeFilter = string.Format("date_range={0}", StringConverter.TimeFilterToString(time));
                 useTime = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            if (!string.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
             {
-                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                ageFilter = string.Format("age_group={0}", StringConverter.AgeFilterToString(age));
                 useAge = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            if (!string.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
             {
-                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                weightFilter = string.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
                 useWeight = true;
             }
 
-            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&following={6}&page={7}&per_page={8}&access_token={9}",
+            string getUrl = string.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&following={6}&page={7}&per_page={8}&access_token={9}",
                 Endpoints.Leaderboard,
                 segmentId,
-                useGender ? genderFilter : String.Empty,
-                useTime ? timeFilter : String.Empty,
-                useAge ? ageFilter : String.Empty,
-                useWeight ? weightFilter : String.Empty,
+                useGender ? genderFilter : string.Empty,
+                useTime ? timeFilter : string.Empty,
+                useAge ? ageFilter : string.Empty,
+                useWeight ? weightFilter : string.Empty,
                 following,
                 page,
                 perPage,
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -350,10 +350,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of segments where the athlete is the record holder.</returns>
-        public async Task<List<SegmentEffort>> GetRecordsAsync(String athleteId)
+        public async Task<List<SegmentEffort>> GetRecordsAsync(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -364,8 +364,8 @@ namespace Strava.Clients
         /// <returns>A list of segments that are starred by the currently authenticated athlete.</returns>
         public async Task<List<SegmentSummary>> GetStarredSegmentsAsync()
         {
-            String getUrl = String.Format("{0}/?access_token={1}", Endpoints.Starred, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/?access_token={1}", Endpoints.Starred, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentSummary>>.Unmarshal(json);
         }
@@ -374,10 +374,10 @@ namespace Strava.Clients
         /// Gets all the starred segments of an Athlete.
         /// </summary>
         /// <returns>A list of segments that are starred by the athlete.</returns>
-        public async Task<List<SegmentSummary>> GetStarredSegmentsAsync(String athleteId)
+        public async Task<List<SegmentSummary>> GetStarredSegmentsAsync(string athleteId)
         {
-            String getUrl = String.Format("https://www.strava.com/api/v3/athletes/{0}/segments/starred/?access_token={1}", athleteId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("https://www.strava.com/api/v3/athletes/{0}/segments/starred/?access_token={1}", athleteId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentSummary>>.Unmarshal(json);
         }
@@ -387,7 +387,7 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment Id.</param>
         /// <returns>The full and unfiltered leaderboard></returns>
-        public async Task<Leaderboard> GetFullSegmentLeaderboardAsync(String segmentId)
+        public async Task<Leaderboard> GetFullSegmentLeaderboardAsync(string segmentId)
         {
             int page = 1;
 
@@ -421,15 +421,15 @@ namespace Strava.Clients
         /// <param name="page">The page.</param>
         /// <param name="perPage">Defines how many entries will be loaded per page.</param>
         /// <returns>The segment leaderboard</returns>
-        public async Task<Leaderboard> GetSegmentLeaderboardAsync(String segmentId, int page, int perPage)
+        public async Task<Leaderboard> GetSegmentLeaderboardAsync(string segmentId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/leaderboard?filter=overall&page={2}&per_page={3}&access_token={4}", 
+            string getUrl = string.Format("{0}/{1}/leaderboard?filter=overall&page={2}&per_page={3}&access_token={4}", 
                 Endpoints.Leaderboard, 
                 segmentId,
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -439,10 +439,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param>
         /// <returns>The total number of entries of the specified Strava segment.</returns>
-        public async Task<int> GetSegmentEntryCountAsync(String segmentId)
+        public async Task<int> GetSegmentEntryCountAsync(string segmentId)
         {
-            String getUrl = String.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
             Leaderboard leaderboard = Unmarshaller<Leaderboard>.Unmarshal(json);
 
             return leaderboard.EntryCount;
@@ -453,10 +453,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param>
         /// <returns>The total number of efforts of the specified Strava segment.</returns>
-        public async Task<int> GetSegmentEffortCountAsync(String segmentId)
+        public async Task<int> GetSegmentEffortCountAsync(string segmentId)
         {
-            String getUrl = String.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
             Leaderboard leaderboard = Unmarshaller<Leaderboard>.Unmarshal(json);
 
             return leaderboard.EffortCount;
@@ -471,19 +471,19 @@ namespace Strava.Clients
         /// popular ones will be returned.</returns>
         public async Task<ExplorerResult> ExploreSegmentsAsync(Coordinate southWest, Coordinate northEast)
         {
-            String bnds = String.Format("{0},{1},{2},{3}",
+            string bnds = string.Format("{0},{1},{2},{3}",
                 southWest.Latitude.ToString(CultureInfo.InvariantCulture),
                 southWest.Longitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Latitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Longitude.ToString(CultureInfo.InvariantCulture)
                 );
-            
-            String getUrl = String.Format("{0}/explore?bounds={1}&access_token={2}",
+
+            string getUrl = string.Format("{0}/explore?bounds={1}&access_token={2}",
                 Endpoints.Leaderboard,
                 bnds,
                 Authentication.AccessToken);
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<ExplorerResult>.Unmarshal(json);
         }
@@ -499,21 +499,21 @@ namespace Strava.Clients
         /// popular ones will be returned.</returns>
         public async Task<ExplorerResult> ExploreSegmentsAsync(Coordinate southWest, Coordinate northEast, int minCat, int maxCat)
         {
-            String bnds = String.Format("{0},{1},{2},{3}",
+            string bnds = string.Format("{0},{1},{2},{3}",
                 southWest.Latitude.ToString(CultureInfo.InvariantCulture),
                 southWest.Longitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Latitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Longitude.ToString(CultureInfo.InvariantCulture)
                 );
 
-            String getUrl = String.Format("{0}/explore?bounds={1}&min_cat={2}&max_cat={3}&access_token={4}",
+            string getUrl = string.Format("{0}/explore?bounds={1}&min_cat={2}&max_cat={3}&access_token={4}",
                 Endpoints.Leaderboard,
                 bnds,
                 minCat,
                 maxCat,
                 Authentication.AccessToken);
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<ExplorerResult>.Unmarshal(json);
         }
@@ -523,14 +523,14 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param>
         /// <returns>A detailed representation of the segment.</returns>
-        public async Task<Segment> GetSegmentAsync(String segmentId)
+        public async Task<Segment> GetSegmentAsync(string segmentId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}",
+            string getUrl = string.Format("{0}/{1}?access_token={2}",
                 Endpoints.Leaderboard,
                 segmentId,
                 Authentication.AccessToken);
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Segment>.Unmarshal(json);
         }
@@ -549,7 +549,7 @@ namespace Strava.Clients
         /// <param name="time">The time used to filter the leaderboard.</param> 
         /// <param name="gender">The gender used to filter the leaderboard.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        public Leaderboard GetSegmentLeaderboard(string segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
         {
             int page = 1;
 
@@ -588,51 +588,51 @@ namespace Strava.Clients
         /// <param name="page">The result page.</param>
         /// <param name="perPage">Efforts shown per page.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        public Leaderboard GetSegmentLeaderboard(string segmentId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
         {
             bool useGender = false;
             bool useTime = false;
             bool useAge = false;
             bool useWeight = false;
-            String genderFilter = String.Empty;
-            String timeFilter = String.Empty;
-            String ageFilter = String.Empty;
-            String weightFilter = String.Empty;
+            string genderFilter = string.Empty;
+            string timeFilter = string.Empty;
+            string ageFilter = string.Empty;
+            string weightFilter = string.Empty;
 
-            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            if (!string.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
             {
-                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                genderFilter = string.Format("gender={0}", StringConverter.GenderFilterToString(gender));
                 useGender = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            if (!string.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
             {
-                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                timeFilter = string.Format("date_range={0}", StringConverter.TimeFilterToString(time));
                 useTime = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            if (!string.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
             {
-                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                ageFilter = string.Format("age_group={0}", StringConverter.AgeFilterToString(age));
                 useAge = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            if (!string.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
             {
-                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                weightFilter = string.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
                 useWeight = true;
             }
 
-            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&page={6}&per_page={7}&access_token={8}",
+            string getUrl = string.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&page={6}&per_page={7}&access_token={8}",
                 Endpoints.Leaderboard,
                 segmentId,
-                useGender ? genderFilter : String.Empty,
-                useTime ? timeFilter : String.Empty,
-                useAge ? ageFilter : String.Empty,
-                useWeight ? weightFilter : String.Empty,
+                useGender ? genderFilter : string.Empty,
+                useTime ? timeFilter : string.Empty,
+                useAge ? ageFilter : string.Empty,
+                useWeight ? weightFilter : string.Empty,
                 page,
                 perPage,
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -648,7 +648,7 @@ namespace Strava.Clients
         /// <param name="time">The time used to filter the leaderboard.</param> 
         /// <param name="gender">The gender used to filter the leaderboard.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        public Leaderboard GetSegmentLeaderboard(string segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
         {
             int page = 1;
 
@@ -688,52 +688,52 @@ namespace Strava.Clients
         /// <param name="page">The result page.</param>
         /// <param name="perPage">Efforts shown per page.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        public Leaderboard GetSegmentLeaderboard(string segmentId, int clubId, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
         {
             bool useGender = false;
             bool useTime = false;
             bool useAge = false;
             bool useWeight = false;
-            String genderFilter = String.Empty;
-            String timeFilter = String.Empty;
-            String ageFilter = String.Empty;
-            String weightFilter = String.Empty;
+            string genderFilter = string.Empty;
+            string timeFilter = string.Empty;
+            string ageFilter = string.Empty;
+            string weightFilter = string.Empty;
 
-            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            if (!string.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
             {
-                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                genderFilter = string.Format("gender={0}", StringConverter.GenderFilterToString(gender));
                 useGender = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            if (!string.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
             {
-                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                timeFilter = string.Format("date_range={0}", StringConverter.TimeFilterToString(time));
                 useTime = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            if (!string.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
             {
-                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                ageFilter = string.Format("age_group={0}", StringConverter.AgeFilterToString(age));
                 useAge = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            if (!string.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
             {
-                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                weightFilter = string.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
                 useWeight = true;
             }
 
-            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&club_id={6}&page={7}&per_page={8}&access_token={9}",
+            string getUrl = string.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&club_id={6}&page={7}&per_page={8}&access_token={9}",
                 Endpoints.Leaderboard,
                 segmentId,
-                useGender ? genderFilter : String.Empty,
-                useTime ? timeFilter : String.Empty,
-                useAge ? ageFilter : String.Empty,
-                useWeight ? weightFilter : String.Empty,
+                useGender ? genderFilter : string.Empty,
+                useTime ? timeFilter : string.Empty,
+                useAge ? ageFilter : string.Empty,
+                useWeight ? weightFilter : string.Empty,
                 clubId,
                 page,
                 perPage,
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -749,7 +749,7 @@ namespace Strava.Clients
         /// <param name="time">The time used to filter the leaderboard.</param> 
         /// <param name="gender">The gender used to filter the leaderboard.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
+        public Leaderboard GetSegmentLeaderboard(string segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender)
         {
             int page = 1;
 
@@ -789,52 +789,52 @@ namespace Strava.Clients
         /// <param name="page">The result page.</param>
         /// <param name="perPage">Efforts shown per page.</param>
         /// <returns>The leaderboard filtered by gender.</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
+        public Leaderboard GetSegmentLeaderboard(string segmentId, bool following, WeightFilter weight, AgeFilter age, TimeFilter time, GenderFilter gender, int page, int perPage)
         {
             bool useGender = false;
             bool useTime = false;
             bool useAge = false;
             bool useWeight = false;
-            String genderFilter = String.Empty;
-            String timeFilter = String.Empty;
-            String ageFilter = String.Empty;
-            String weightFilter = String.Empty;
+            string genderFilter = string.Empty;
+            string timeFilter = string.Empty;
+            string ageFilter = string.Empty;
+            string weightFilter = string.Empty;
 
-            if (!String.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
+            if (!string.IsNullOrEmpty(StringConverter.GenderFilterToString(gender)))
             {
-                genderFilter = String.Format("gender={0}", StringConverter.GenderFilterToString(gender));
+                genderFilter = string.Format("gender={0}", StringConverter.GenderFilterToString(gender));
                 useGender = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
+            if (!string.IsNullOrEmpty(StringConverter.TimeFilterToString(time)))
             {
-                timeFilter = String.Format("date_range={0}", StringConverter.TimeFilterToString(time));
+                timeFilter = string.Format("date_range={0}", StringConverter.TimeFilterToString(time));
                 useTime = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
+            if (!string.IsNullOrEmpty(StringConverter.AgeFilterToString(age)))
             {
-                ageFilter = String.Format("age_group={0}", StringConverter.AgeFilterToString(age));
+                ageFilter = string.Format("age_group={0}", StringConverter.AgeFilterToString(age));
                 useAge = true;
             }
-            if (!String.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
+            if (!string.IsNullOrEmpty(StringConverter.WeightFilterToString(weight)))
             {
-                weightFilter = String.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
+                weightFilter = string.Format("weight_class={0}", StringConverter.WeightFilterToString(weight));
                 useWeight = true;
             }
 
-            String getUrl = String.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&following={6}&page={7}&per_page={8}&access_token={9}",
+            string getUrl = string.Format("{0}/{1}/leaderboard?{2}&{3}&{4}&{5}&following={6}&page={7}&per_page={8}&access_token={9}",
                 Endpoints.Leaderboard,
                 segmentId,
-                useGender ? genderFilter : String.Empty,
-                useTime ? timeFilter : String.Empty,
-                useAge ? ageFilter : String.Empty,
-                useWeight ? weightFilter : String.Empty,
+                useGender ? genderFilter : string.Empty,
+                useTime ? timeFilter : string.Empty,
+                useAge ? ageFilter : string.Empty,
+                useWeight ? weightFilter : string.Empty,
                 following,
                 page,
                 perPage,
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -844,10 +844,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of segments where the athlete is the record holder.</returns>
-        public List<SegmentEffort> GetRecords(String athleteId)
+        public List<SegmentEffort> GetRecords(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/koms?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -856,10 +856,10 @@ namespace Strava.Clients
         /// Gets all the starred segments of an Athlete.
         /// </summary>
         /// <returns>A list of segments that are starred by the athlete.</returns>
-        public List<SegmentSummary> GetStarredSegments(String athleteId)
+        public List<SegmentSummary> GetStarredSegments(string athleteId)
         {
-            String getUrl = String.Format("https://www.strava.com/api/v3/athletes/{0}/segments/starred?access_token={1}", athleteId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("https://www.strava.com/api/v3/athletes/{0}/segments/starred?access_token={1}", athleteId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentSummary>>.Unmarshal(json);
         }
@@ -870,8 +870,8 @@ namespace Strava.Clients
         /// <returns>A list of segments that are starred by the currently authenticated athlete.</returns>
         public List<SegmentSummary> GetStarredSegments()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Starred, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}?access_token={1}", Endpoints.Starred, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentSummary>>.Unmarshal(json);
         }
@@ -881,7 +881,7 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment Id.</param>
         /// <returns>The full and unfiltered leaderboard.</returns>
-        public Leaderboard GetFullSegmentLeaderboard(String segmentId)
+        public Leaderboard GetFullSegmentLeaderboard(string segmentId)
         {
             int page = 1;
 
@@ -915,15 +915,15 @@ namespace Strava.Clients
         /// <param name="page">The page.</param>
         /// <param name="perPage">Defines how many entries will be loaded per page.</param>
         /// <returns>The segment leaderboard</returns>
-        public Leaderboard GetSegmentLeaderboard(String segmentId, int page, int perPage)
+        public Leaderboard GetSegmentLeaderboard(string segmentId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/leaderboard?filter=overall&page={2}&per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}/{1}/leaderboard?filter=overall&page={2}&per_page={3}&access_token={4}",
                 Endpoints.Leaderboard,
                 segmentId,
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Leaderboard>.Unmarshal(json);
         }
@@ -933,10 +933,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param>
         /// <returns>The total number of entries of the specified Strava segment.</returns>
-        public int GetSegmentEntryCount(String segmentId)
+        public int GetSegmentEntryCount(string segmentId)
         {
-            String getUrl = String.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
             Leaderboard leaderboard = Unmarshaller<Leaderboard>.Unmarshal(json);
 
             return leaderboard.EntryCount;
@@ -947,10 +947,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param>
         /// <returns>The total number of efforts of the specified Strava segment.</returns>
-        public int GetSegmentEffortCount(String segmentId)
+        public int GetSegmentEffortCount(string segmentId)
         {
-            String getUrl = String.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/leaderboard?filter=overall&access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
             Leaderboard leaderboard = Unmarshaller<Leaderboard>.Unmarshal(json);
 
             return leaderboard.EffortCount;
@@ -965,19 +965,15 @@ namespace Strava.Clients
         /// popular ones will be returned.</returns>
         public ExplorerResult ExploreSegments(Coordinate southWest, Coordinate northEast)
         {
-            String bnds = String.Format("{0},{1},{2},{3}",
+            string bnds = string.Format("{0},{1},{2},{3}",
                 southWest.Latitude.ToString(CultureInfo.InvariantCulture),
                 southWest.Longitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Latitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Longitude.ToString(CultureInfo.InvariantCulture)
                 );
 
-            String getUrl = String.Format("{0}/explore?bounds={1}&access_token={2}",
-                Endpoints.Leaderboard,
-                bnds,
-                Authentication.AccessToken);
-
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/explore?bounds={1}&access_token={2}", Endpoints.Leaderboard, bnds, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<ExplorerResult>.Unmarshal(json);
         }
@@ -993,21 +989,16 @@ namespace Strava.Clients
         /// popular ones will be returned.</returns>
         public ExplorerResult ExploreSegments(Coordinate southWest, Coordinate northEast, int minCat, int maxCat)
         {
-            String bnds = String.Format("{0},{1},{2},{3}",
+            string bnds = string.Format("{0},{1},{2},{3}",
                 southWest.Latitude.ToString(CultureInfo.InvariantCulture),
                 southWest.Longitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Latitude.ToString(CultureInfo.InvariantCulture),
                 northEast.Longitude.ToString(CultureInfo.InvariantCulture)
                 );
 
-            String getUrl = String.Format("{0}/explore?bounds={1}&min_cat={2}&max_cat={3}&access_token={4}",
-                Endpoints.Leaderboard,
-                bnds,
-                minCat,
-                maxCat,
-                Authentication.AccessToken);
-
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/explore?bounds={1}&min_cat={2}&max_cat={3}&access_token={4}",
+                Endpoints.Leaderboard, bnds, minCat, maxCat, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<ExplorerResult>.Unmarshal(json);
         }
@@ -1017,14 +1008,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param>
         /// <returns>A detailed representation of the segment.</returns>
-        public Segment GetSegment(String segmentId)
+        public Segment GetSegment(string segmentId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}",
-                Endpoints.Leaderboard,
-                segmentId,
-                Authentication.AccessToken);
-
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Leaderboard, segmentId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Segment>.Unmarshal(json);
         }

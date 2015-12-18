@@ -47,8 +47,8 @@ namespace Strava.Clients
         /// <returns>The currently authenticated athlete.</returns>
         public async Task<Athlete> GetAthleteAsync()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Athlete>.Unmarshal(json);
         }
@@ -58,10 +58,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava Id of the athlete.</param>
         /// <returns>The AthleteSummary object of the athlete.</returns>
-        public async Task<AthleteSummary> GetAthleteAsync(String athleteId)
+        public async Task<AthleteSummary> GetAthleteAsync(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<AthleteSummary>.Unmarshal(json);
         }
@@ -72,8 +72,8 @@ namespace Strava.Clients
         /// <returns>A list of the friends of the currently authenticated athlete.</returns>
         public async Task<List<AthleteSummary>> GetFriendsAsync()
         {
-            String getUrl = String.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -83,10 +83,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>The list of friends of the athlete.</returns>
-        public async Task<List<AthleteSummary>> GetFriendsAsync(String athleteId)
+        public async Task<List<AthleteSummary>> GetFriendsAsync(string athleteId)
         {
-            String getUrl = String.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = String.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -97,8 +97,8 @@ namespace Strava.Clients
         /// <returns>A list of athletes that follow the currently authenticated athlete.</returns>
         public async Task<List<AthleteSummary>> GetFollowersAsync()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Follower, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}?access_token={1}", Endpoints.Follower, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -108,10 +108,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of athletes that follow the specified athlete.</returns>
-        public async Task<List<AthleteSummary>> GetFollowersAsync(String athleteId)
+        public async Task<List<AthleteSummary>> GetFollowersAsync(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/followers?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = String.Format("{0}/{1}/followers?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -121,10 +121,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of athletes that both you and the specified athlete are following.</returns>
-        public async Task<List<AthleteSummary>> GetBothFollowingAsync(String athleteId)
+        public async Task<List<AthleteSummary>> GetBothFollowingAsync(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/both-following?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/both-following?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -135,27 +135,27 @@ namespace Strava.Clients
         /// <param name="parameter">The parameter that is being updated.</param>
         /// <param name="value">The value to update to.</param>
         /// <returns>Athlete object of the currently authenticated athlete with the updated parameter.</returns>
-        public async Task<Athlete> UpdateAthleteAsync(AthleteParameter parameter, String value)
+        public async Task<Athlete> UpdateAthleteAsync(AthleteParameter parameter, string value)
         {
-            String putUrl = String.Empty;
+            string putUrl = String.Empty;
 
             switch (parameter)
             {
                 case AthleteParameter.City:
-                    putUrl = String.Format("{0}?city={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?city={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
                 case AthleteParameter.Country:
-                    putUrl = String.Format("{0}?country={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?country={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
                 case AthleteParameter.State:
-                    putUrl = String.Format("{0}?state={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?state={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
                 case AthleteParameter.Weight:
-                    putUrl = String.Format("{0}?weight={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?weight={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
             }
 
-            String json = await WebRequest.SendPutAsync(new Uri(putUrl));
+            string json = await WebRequest.SendPutAsync(new Uri(putUrl));
 
             return Unmarshaller<Athlete>.Unmarshal(json);
         }
@@ -167,8 +167,8 @@ namespace Strava.Clients
         /// <returns>The currently authenticated athlete.</returns>
         public async Task<Athlete> UpdateAthleteSex(Gender gender)
         {
-            String putUrl = String.Format("{0}?sex={1}&access_token={2}", Endpoints.Athlete, gender.ToString().Substring(0, 1), Authentication.AccessToken);
-            String json = await WebRequest.SendPutAsync(new Uri(putUrl));
+            string putUrl = String.Format("{0}?sex={1}&access_token={2}", Endpoints.Athlete, gender.ToString().Substring(0, 1), Authentication.AccessToken);
+            string json = await WebRequest.SendPutAsync(new Uri(putUrl));
 
             return Unmarshaller<Athlete>.Unmarshal(json);
         }
@@ -183,8 +183,8 @@ namespace Strava.Clients
         /// <returns>The currently authenticated athlete.</returns>
         public Athlete GetAthlete()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Athlete>.Unmarshal(json);
         }
@@ -194,10 +194,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava Id of the athlete.</param>
         /// <returns>The AthleteSummary object of the athlete.</returns>
-        public AthleteSummary GetAthlete(String athleteId)
+        public AthleteSummary GetAthlete(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Athletes, athleteId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<AthleteSummary>.Unmarshal(json);
         }
@@ -208,8 +208,9 @@ namespace Strava.Clients
         /// <returns>A list of the friends of the currently authenticated athlete.</returns>
         public List<AthleteSummary> GetFriends()
         {
-            String getUrl = String.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = String.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
+
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
 
@@ -218,10 +219,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>The list of friends of the athlete.</returns>
-        public List<AthleteSummary> GetFriends(String athleteId)
+        public List<AthleteSummary> GetFriends(string athleteId)
         {
-            String getUrl = String.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/friends?access_token={1}", Endpoints.Athlete, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -232,8 +233,9 @@ namespace Strava.Clients
         /// <returns>A list of athletes that follow the currently authenticated athlete.</returns>
         public List<AthleteSummary> GetFollowers()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Follower, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = String.Format("{0}?access_token={1}", Endpoints.Follower, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
+
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
 
@@ -242,10 +244,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of athletes that follow the specified athlete.</returns>
-        public List<AthleteSummary> GetFollowers(String athleteId)
+        public List<AthleteSummary> GetFollowers(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/followers?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/followers?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -255,10 +257,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of athletes that both you and the specified athlete are following.</returns>
-        public List<AthleteSummary> GetBothFollowing(String athleteId)
+        public List<AthleteSummary> GetBothFollowing(string athleteId)
         {
-            String getUrl = String.Format("{0}/{1}/both-following?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/both-following?access_token={2}", Endpoints.Followers, athleteId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -269,27 +271,27 @@ namespace Strava.Clients
         /// <param name="parameter">The parameter that is being updated.</param>
         /// <param name="value">The value to update to.</param>
         /// <returns>Athlete object of the currently authenticated athlete with the updated parameter.</returns>
-        public Athlete UpdateAthlete(AthleteParameter parameter, String value)
+        public Athlete UpdateAthlete(AthleteParameter parameter, string value)
         {
-            String putUrl = String.Empty;
+            string putUrl = string.Empty;
 
             switch (parameter)
             {
                 case AthleteParameter.City:
-                    putUrl = String.Format("{0}?city={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?city={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
                 case AthleteParameter.Country:
-                    putUrl = String.Format("{0}?country={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?country={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
                 case AthleteParameter.State:
-                    putUrl = String.Format("{0}?state={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?state={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
                 case AthleteParameter.Weight:
-                    putUrl = String.Format("{0}?weight={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
+                    putUrl = string.Format("{0}?weight={1}&access_token={2}", Endpoints.Athlete, value, Authentication.AccessToken);
                     break;
             }
 
-            String json = WebRequest.SendPut(new Uri(putUrl));
+            string json = WebRequest.SendPut(new Uri(putUrl));
 
             return Unmarshaller<Athlete>.Unmarshal(json);
         }
