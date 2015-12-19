@@ -48,7 +48,7 @@ namespace Strava.Clients
         /// <param name="after">The date after all the efforts have been recorded.</param>
         /// <param name="before">The date before all the efforts have been recorded.</param>
         /// <returns>A list of segment efforts</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsByTimeAsync(String segmentId, DateTime after, DateTime before)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsByTimeAsync(string segmentId, DateTime after, DateTime before)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -81,9 +81,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of segment efforts</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsByTimeAsync(String segmentId, DateTime after, DateTime before, int page, int perPage)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsByTimeAsync(string segmentId, DateTime after, DateTime before, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?start_date_local={2}&end_date_local={3}&page={4}&per_page={5}&access_token={6}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?start_date_local={2}&end_date_local={3}&page={4}&per_page={5}&access_token={6}",
                 Endpoints.Leaderboard,
                 segmentId,
                 after.ToString("O"),
@@ -93,7 +93,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -104,7 +104,7 @@ namespace Strava.Clients
         /// <param name="segmentId">The Strava segment id.</param>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsByAthleteAsync(String segmentId, String athleteId)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsByAthleteAsync(string segmentId, string athleteId)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -136,9 +136,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsByAthleteAsync(String segmentId, String athleteId, int page, int perPage)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsByAthleteAsync(string segmentId, string athleteId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?athlete_id={2}&page={3}&per_page={4}&access_token={5}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?athlete_id={2}&page={3}&per_page={4}&access_token={5}",
                 Endpoints.Leaderboard,
                 segmentId,
                 athleteId,
@@ -147,7 +147,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -160,7 +160,7 @@ namespace Strava.Clients
         /// <param name="after">The date after all the efforts have been recorded.</param>
         /// <param name="before">The date before all the efforts have been recorded.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(String segmentId, String athleteId, DateTime after, DateTime before)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(string segmentId, string athleteId, DateTime after, DateTime before)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -194,9 +194,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(String segmentId, String athleteId, DateTime after, DateTime before, int page, int perPage)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(string segmentId, string athleteId, DateTime after, DateTime before, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?athlete_id={2}&start_date_local={3}&end_date_local={4}&page={5}per_page={6}&access_token={7}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?athlete_id={2}&start_date_local={3}&end_date_local={4}&page={5}per_page={6}&access_token={7}",
                 Endpoints.Leaderboard,
                 segmentId,
                 athleteId,
@@ -207,7 +207,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -217,7 +217,7 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param> 
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(String segmentId)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(string segmentId)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -248,9 +248,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(String segmentId, int page, int perPage)
+        public async Task<List<SegmentEffort>> GetSegmentEffortsAsync(string segmentId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?page={2}per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?page={2}per_page={3}&access_token={4}",
                 Endpoints.Leaderboard,
                 segmentId,
                 page,
@@ -258,7 +258,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -274,7 +274,7 @@ namespace Strava.Clients
         /// <param name="after">The date after all the efforts have been recorded.</param>
         /// <param name="before">The date before all the efforts have been recorded.</param>
         /// <returns>A list of segment efforts</returns>
-        public List<SegmentEffort> GetSegmentEffortsByTime(String segmentId, DateTime after, DateTime before)
+        public List<SegmentEffort> GetSegmentEffortsByTime(string segmentId, DateTime after, DateTime before)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -307,9 +307,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of segment efforts</returns>
-        public List<SegmentEffort> GetSegmentEffortsByTime(String segmentId, DateTime after, DateTime before, int page, int perPage)
+        public List<SegmentEffort> GetSegmentEffortsByTime(string segmentId, DateTime after, DateTime before, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?start_date_local={2}&end_date_local={3}&page={4}&per_page={5}&access_token={6}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?start_date_local={2}&end_date_local={3}&page={4}&per_page={5}&access_token={6}",
                 Endpoints.Leaderboard,
                 segmentId,
                 after.ToString("O"),
@@ -319,7 +319,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -330,7 +330,7 @@ namespace Strava.Clients
         /// <param name="segmentId">The Strava segment id.</param>
         /// <param name="athleteId">The Strava athlete id.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public List<SegmentEffort> GetSegmentEffortsByAthlete(String segmentId, String athleteId)
+        public List<SegmentEffort> GetSegmentEffortsByAthlete(string segmentId, string athleteId)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -362,9 +362,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public List<SegmentEffort> GetSegmentEffortsByAthlete(String segmentId, String athleteId, int page, int perPage)
+        public List<SegmentEffort> GetSegmentEffortsByAthlete(string segmentId, string athleteId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?athlete_id={2}&page={3}&per_page={4}&access_token={5}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?athlete_id={2}&page={3}&per_page={4}&access_token={5}",
                 Endpoints.Leaderboard,
                 segmentId,
                 athleteId,
@@ -373,7 +373,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -386,7 +386,7 @@ namespace Strava.Clients
         /// <param name="after">The date after all the efforts have been recorded.</param>
         /// <param name="before">The date before all the efforts have been recorded.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public List<SegmentEffort> GetSegmentEfforts(String segmentId, String athleteId, DateTime after, DateTime before)
+        public List<SegmentEffort> GetSegmentEfforts(string segmentId, string athleteId, DateTime after, DateTime before)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -420,9 +420,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public List<SegmentEffort> GetSegmentEfforts(String segmentId, String athleteId, DateTime after, DateTime before, int page, int perPage)
+        public List<SegmentEffort> GetSegmentEfforts(string segmentId, string athleteId, DateTime after, DateTime before, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?athlete_id={2}&start_date_local={3}&end_date_local={4}&page={5}per_page={6}&access_token={7}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?athlete_id={2}&start_date_local={3}&end_date_local={4}&page={5}per_page={6}&access_token={7}",
                 Endpoints.Leaderboard,
                 segmentId,
                 athleteId,
@@ -433,7 +433,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }
@@ -443,7 +443,7 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="segmentId">The Strava segment id.</param> 
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public List<SegmentEffort> GetSegmentEfforts(String segmentId)
+        public List<SegmentEffort> GetSegmentEfforts(string segmentId)
         {
             List<SegmentEffort> activities = new List<SegmentEffort>();
             int page = 1;
@@ -474,9 +474,9 @@ namespace Strava.Clients
         /// <param name="page">The results page.</param>
         /// <param name="perPage">The number of results shown per page.</param>
         /// <returns>A list of efforts from the athlete on the specified segment.</returns>
-        public List<SegmentEffort> GetSegmentEfforts(String segmentId, int page, int perPage)
+        public List<SegmentEffort> GetSegmentEfforts(string segmentId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/all_efforts?page={2}per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}/{1}/all_efforts?page={2}per_page={3}&access_token={4}",
                 Endpoints.Leaderboard,
                 segmentId,
                 page,
@@ -484,7 +484,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<SegmentEffort>>.Unmarshal(json);
         }

@@ -31,19 +31,19 @@ namespace Strava.Activities
         /// The map id.
         /// </summary>
         [JsonProperty("id")]
-        public String Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// The map's polyline. This polyline can be converted to coordinates.
         /// </summary>
         [JsonProperty("polyline")]
-        public String Polyline { get; set; }
+        public string Polyline { get; set; }
 
         /// <summary>
         /// A summary of the polyline.
         /// </summary>
         [JsonProperty("summary_polyline")]
-        public String SummaryPolyline { get; set; }
+        public string SummaryPolyline { get; set; }
 
         /// <summary>
         /// The resource state gives information about the level of details of the map.

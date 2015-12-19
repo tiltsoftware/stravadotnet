@@ -52,19 +52,19 @@ namespace Strava.Athletes
         /// The date preference. ISO 8601 time string.
         /// </summary>
         [JsonProperty("date_preference")]
-        public String DatePreference { get; set; }
+        public string DatePreference { get; set; }
 
         /// <summary>
         /// Either 'feet' or 'meters'
         /// </summary>
         [JsonProperty("measurement_preference")]
-        public String MeasurementPreference { get; set; }
+        public string MeasurementPreference { get; set; }
 
         /// <summary>
         /// The email address.
         /// </summary>
         [JsonProperty("email")]
-        public String Email { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// The functional threshold power.

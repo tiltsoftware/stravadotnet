@@ -44,13 +44,13 @@ namespace Strava.Segments
         /// The name of the segment.
         /// </summary>
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The type of activity.
         /// </summary>
         [JsonProperty("activity_type")]
-        public String ActivityType { get; set; }
+        public string ActivityType { get; set; }
 
         /// <summary>
         /// The segment's distance.
@@ -116,19 +116,19 @@ namespace Strava.Segments
         /// The city where this segment is located in.
         /// </summary>
         [JsonProperty("city")]
-        public String City { get; set; }
+        public string City { get; set; }
 
         /// <summary>
         /// The state where this segment is located in.
         /// </summary>
         [JsonProperty("state")]
-        public String State { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// The country where this segment is located in.
         /// </summary>
         [JsonProperty("country")]
-        public String Country { get; set; }
+        public string Country { get; set; }
 
         /// <summary>
         /// True if this segment is private.

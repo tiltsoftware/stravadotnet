@@ -34,19 +34,19 @@ namespace Strava.Activities
         /// The activity's name.
         /// </summary>
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The external id of the activity. Provided upon upload. Can not be changed.
         /// </summary>
         [JsonProperty("external_id")]
-        public String ExternalId { get; set; }
+        public string ExternalId { get; set; }
 
         /// <summary>
         /// The type of the activity.
         /// </summary>
         [JsonProperty("type")]
-        private String _type { get; set; }
+        private string _type { get; set; }
 
         /// <summary>
         /// The type of the activity.
@@ -114,25 +114,25 @@ namespace Strava.Activities
         /// The city where this activity was started.
         /// </summary>
         [JsonProperty("city")]
-        public String City { get; set; }
+        public string City { get; set; }
 
         /// <summary>
         /// The state where this activity was started.
         /// </summary>
         [JsonProperty("state")]
-        public String State { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// The country where this activity was started.
         /// </summary>
         [JsonProperty("country")]
-        public String Country { get; set; }
+        public string Country { get; set; }
 
         /// <summary>
         /// The id of the gear used.
         /// </summary>
         [JsonProperty("gear_id")]
-        public String GearId { get; set; }
+        public string GearId { get; set; }
 
         /// <summary>
         /// The average speed in meters per seconds.
@@ -234,13 +234,13 @@ namespace Strava.Activities
         /// Start date of the activity.
         /// </summary>
         [JsonProperty("start_date")]
-        public String StartDate { get; set; }
+        public string StartDate { get; set; }
         
         /// <summary>
         /// Local start date of the activity.
         /// </summary>
         [JsonProperty("start_date_local")]
-        public String StartDateLocal { get; set; }
+        public string StartDateLocal { get; set; }
 
         /// <summary>
         /// Returns the StartDate-Property as a DateTime object.
@@ -278,7 +278,7 @@ namespace Strava.Activities
         /// Timezone of the activity.
         /// </summary>
         [JsonProperty("timezone")]
-        public String TimeZone { get; set; }
+        public string TimeZone { get; set; }
 
         /// <summary>
         /// Coordinate where the activity was started.

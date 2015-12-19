@@ -35,7 +35,7 @@ namespace Strava.Authentication
         /// Initializes a new instance of the StaticAuthentication class.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
-        public StaticAuthentication(String accessToken)
+        public StaticAuthentication(string accessToken)
         {
             AccessToken = accessToken;
         }

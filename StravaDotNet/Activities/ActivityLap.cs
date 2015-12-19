@@ -96,7 +96,7 @@ namespace Strava.Activities
         {
             get
             {
-                if (!String.IsNullOrEmpty(_start))
+                if (!string.IsNullOrEmpty(_start))
                     return DateTime.Parse(_start);
 
                 return DateTime.MinValue;

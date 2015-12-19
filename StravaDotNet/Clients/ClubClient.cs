@@ -48,10 +48,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="clubId">The id of the club.</param>
         /// <returns>The Club object containing detailed information about the club.</returns>
-        public async Task<Club> GetClubAsync(String clubId)
+        public async Task<Club> GetClubAsync(string clubId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Club>.Unmarshal(json);
         }
@@ -62,8 +62,8 @@ namespace Strava.Clients
         /// <returns>The list of clubs in which the currently authenticated user is a member of.</returns>
         public async Task<List<ClubSummary>> GetClubsAsync()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Clubs, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}?access_token={1}", Endpoints.Clubs, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ClubSummary>>.Unmarshal(json);
         }
@@ -73,10 +73,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="clubId">The club's id.</param>
         /// <returns>The club's members.</returns>
-        public async Task<List<AthleteSummary>> GetClubMembersAsync(String clubId)
+        public async Task<List<AthleteSummary>> GetClubMembersAsync(string clubId)
         {
-            String getUrl = String.Format("{0}/{1}/members?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/members?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -86,10 +86,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="clubId">Id of the club you want to get the activities of.</param>
         /// <returns></returns>
-        public async Task<List<ActivitySummary>> GetLatestClubActivitiesAsync(String clubId)
+        public async Task<List<ActivitySummary>> GetLatestClubActivitiesAsync(string clubId)
         {
-            String getUrl = String.Format("{0}/{1}/activities?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/activities?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -101,15 +101,15 @@ namespace Strava.Clients
         /// <param name="page">The page of the activities list.</param>
         /// <param name="perPage">Specifies how many activities shpuld be shown per page.</param>
         /// <returns></returns>
-        public async Task<List<ActivitySummary>> GetLatestClubActivitiesAsync(String clubId, int page, int perPage)
+        public async Task<List<ActivitySummary>> GetLatestClubActivitiesAsync(string clubId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/activities?page={2}&per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}/{1}/activities?page={2}&per_page={3}&access_token={4}",
                 Endpoints.Club,
                 clubId,
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -123,10 +123,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="clubId">The id of the club.</param>
         /// <returns>The Club object containing detailed information about the club.</returns>
-        public Club GetClub(String clubId)
+        public Club GetClub(string clubId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Club>.Unmarshal(json);
         }
@@ -135,9 +135,9 @@ namespace Strava.Clients
         /// Join a Strava Club.
         /// </summary>
         /// <param name="clubId">The Strava Id of the club you want to join.</param>
-        public async void JoinClub(String clubId)
+        public async void JoinClub(string clubId)
         {
-            String postUrl = String.Format("https://www.strava.com/api/v3/clubs/{0}/join?access_token={1}", clubId, Authentication.AccessToken);
+            string postUrl = string.Format("https://www.strava.com/api/v3/clubs/{0}/join?access_token={1}", clubId, Authentication.AccessToken);
             await WebRequest.SendPostAsync(new Uri(postUrl));
         }
 
@@ -145,9 +145,9 @@ namespace Strava.Clients
         /// Leave a Strava Club.
         /// </summary>
         /// <param name="clubId">The Strava Id of the club you want to leave.</param>
-        public async void LeaveClub(String clubId)
+        public async void LeaveClub(string clubId)
         {
-            String postUrl = String.Format("https://www.strava.com/api/v3/clubs/{0}/leave?access_token={1}", clubId, Authentication.AccessToken);
+            string postUrl = string.Format("https://www.strava.com/api/v3/clubs/{0}/leave?access_token={1}", clubId, Authentication.AccessToken);
             await WebRequest.SendPostAsync(new Uri(postUrl));
         }
 
@@ -157,8 +157,8 @@ namespace Strava.Clients
         /// <returns>The list of clubs in which the currently authenticated user is a member of.</returns>
         public List<ClubSummary> GetClubs()
         {
-            String getUrl = String.Format("{0}?access_token={1}", Endpoints.Clubs, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}?access_token={1}", Endpoints.Clubs, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ClubSummary>>.Unmarshal(json);
         }
@@ -168,10 +168,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="clubId">The club's id.</param>
         /// <returns>The club's members.</returns>
-        public List<AthleteSummary> GetClubMembers(String clubId)
+        public List<AthleteSummary> GetClubMembers(string clubId)
         {
-            String getUrl = String.Format("{0}/{1}/members?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/members?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<AthleteSummary>>.Unmarshal(json);
         }
@@ -181,10 +181,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="clubId">Id of the club you want to get the activities of.</param>
         /// <returns></returns>
-        public List<ActivitySummary> GetLatestClubActivities(String clubId)
+        public List<ActivitySummary> GetLatestClubActivities(string clubId)
         {
-            String getUrl = String.Format("{0}/{1}/activities?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/activities?access_token={2}", Endpoints.Club, clubId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -196,15 +196,15 @@ namespace Strava.Clients
         /// <param name="page">The page of the activities list.</param>
         /// <param name="perPage">Specifies how many activities shpuld be shown per page.</param>
         /// <returns></returns>
-        public List<ActivitySummary> GetLatestClubActivities(String clubId, int page, int perPage)
+        public List<ActivitySummary> GetLatestClubActivities(string clubId, int page, int perPage)
         {
-            String getUrl = String.Format("{0}/{1}/activities?page={2}&per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}/{1}/activities?page={2}&per_page={3}&access_token={4}",
                 Endpoints.Club,
                 clubId,
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }

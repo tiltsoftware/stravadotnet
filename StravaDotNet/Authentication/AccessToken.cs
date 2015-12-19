@@ -31,6 +31,6 @@ namespace Strava.Authentication
         /// The access token.
         /// </summary>
         [JsonProperty("access_token")]
-        public String Token { get; set; }
+        public string Token { get; set; }
     }
 }

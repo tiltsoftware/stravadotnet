@@ -32,13 +32,13 @@ namespace Strava.Segments
         /// The date when the segment was created.
         /// </summary>
         [JsonProperty("created_at")]
-        public String CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         /// <summary>
         /// The date when the segment was updated.
         /// </summary>
         [JsonProperty("updated_at")]
-        public String UpdatedAt { get; set; }
+        public string UpdatedAt { get; set; }
 
         /// <summary>
         /// The total elevation gain of the segment.

@@ -44,10 +44,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="id">The id of the user. <remarks>Must match the authenticated athlete!</remarks></param>
         /// <returns>Strava statistics of the currently authenticated user.</returns>
-        private async Task<Stats> GetStatsAsync(String id)
+        private async Task<Stats> GetStatsAsync(string id)
         {
-            String getUrl = String.Format("https://www.strava.com/api/v3/athletes/{0}/stats?access_token={1}", id, Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("https://www.strava.com/api/v3/athletes/{0}/stats?access_token={1}", id, Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Stats>.Unmarshal(json);
         }

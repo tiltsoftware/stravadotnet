@@ -37,25 +37,25 @@ namespace Strava.Upload
         /// The external id. Can not be changed.
         /// </summary>
         [JsonProperty("external_id")]
-        public String ExternalId { get; set; }
+        public string ExternalId { get; set; }
 
         /// <summary>
         /// Error message.
         /// </summary>
         [JsonProperty("error")]
-        public String Error { get; set; }
+        public string Error { get; set; }
 
         /// <summary>
         /// Status message.
         /// </summary>
         [JsonProperty("status")]
-        public String Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// The Strava activity id.
         /// </summary>
         [JsonProperty("activity_id")]
-        public String ActivityId { get; set; }
+        public string ActivityId { get; set; }
 
         /// <summary>
         /// Returns the status string as a more user-friendly enum.

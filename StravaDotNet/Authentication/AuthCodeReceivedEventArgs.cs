@@ -29,7 +29,7 @@ namespace Strava.Authentication
         /// <summary>
         /// the auth token received from Strava.
         /// </summary>
-        public String AuthCode { get; set; }
+        public string AuthCode { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the AuthCodeReceivedEventArgs class.

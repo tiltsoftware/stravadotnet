@@ -42,7 +42,7 @@ namespace Strava.Utilities
         /// </summary>
         /// <param name="isoDate">The ISO 8601 string.</param>
         /// <returns>The DateTime object</returns>
-        public static DateTime ConvertIsoTimeToDateTime(String isoDate)
+        public static DateTime ConvertIsoTimeToDateTime(string isoDate)
         {
             try
             {

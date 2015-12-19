@@ -44,7 +44,7 @@ namespace Strava.Activities
         /// The type of the zone.
         /// </summary>
         [JsonProperty("type")]
-        public String Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Resource state.

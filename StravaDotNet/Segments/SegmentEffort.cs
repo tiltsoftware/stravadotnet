@@ -71,7 +71,7 @@ namespace Strava.Segments
         /// The name of the segment.
         /// </summary>
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Detailed segment object.
@@ -119,7 +119,7 @@ namespace Strava.Segments
         /// Start date and time.
         /// </summary>
         [JsonProperty("start_date")]
-        public String StartDate { get; set; }
+        public string StartDate { get; set; }
 
         /// <summary>
         /// Returns the StartDate-Property as a DateTime object.

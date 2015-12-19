@@ -29,13 +29,13 @@ namespace Strava.Authentication
         /// <summary>
         /// The received access token.
         /// </summary>
-        public String Token { get; set; }
+        public string Token { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the TokenReceivedEventArgs class.
         /// </summary>
         /// <param name="token">The token received from the server.</param>
-        public TokenReceivedEventArgs(String token)
+        public TokenReceivedEventArgs(string token)
         {
             Token = token;
         }

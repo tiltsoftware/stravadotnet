@@ -29,6 +29,6 @@ namespace Strava.Authentication
         /// <summary>
         /// The access token received from Strava.
         /// </summary>
-        String AccessToken { get; set; }
+        string AccessToken { get; set; }
     }
 }

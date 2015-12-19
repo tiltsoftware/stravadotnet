@@ -31,7 +31,7 @@ namespace Strava.Gear
         /// The gear's id.
         /// </summary>
         [JsonProperty("id")]
-        public String Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// True if this is the primary gear.
@@ -43,7 +43,7 @@ namespace Strava.Gear
         /// Gear's name. Athlete entered for bikes, generated from brand and model for shoes
         /// </summary>
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Distance travelled with gear in meters.

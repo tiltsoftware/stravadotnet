@@ -44,10 +44,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="gearId">The Strava id of the gear.</param>
         /// <returns>The gear object.</returns>
-        public async Task<Gear.Bike> GetGearAsync(String gearId)
+        public async Task<Gear.Bike> GetGearAsync(string gearId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Gear, gearId, Authentication.AccessToken);
-            String json = await WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Gear, gearId, Authentication.AccessToken);
+            string json = await WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Gear.Bike>.Unmarshal(json);
         }
@@ -61,10 +61,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="gearId">The Strava id of the gear.</param>
         /// <returns>The gear object.</returns>
-        public Gear.Bike GetGear(String gearId)
+        public Gear.Bike GetGear(string gearId)
         {
-            String getUrl = String.Format("{0}/{1}?access_token={2}", Endpoints.Gear, gearId, Authentication.AccessToken);
-            String json = WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}?access_token={2}", Endpoints.Gear, gearId, Authentication.AccessToken);
+            string json = WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Gear.Bike>.Unmarshal(json);
         }

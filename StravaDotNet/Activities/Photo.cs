@@ -50,37 +50,37 @@ namespace Strava.Activities
         /// Url to the picture. Use the ImageLoader class to download the picture.
         /// </summary>
         [JsonProperty("ref")]
-        public String ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
 
         /// <summary>
         /// The photo's external id.
         /// </summary>
         [JsonProperty("uid")]
-        public String ExternalUid { get; set; }
+        public string ExternalUid { get; set; }
 
         /// <summary>
         /// The caption.
         /// </summary>
         [JsonProperty("caption")]
-        public String Caption { get; set; }
+        public string Caption { get; set; }
 
         /// <summary>
         /// Image source. Currently only "InstagramPhoto"
         /// </summary>
         [JsonProperty("type")]
-        public String Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// The date when the image was uploaded.
         /// </summary>
         [JsonProperty("uploaded_at")]
-        public String UploadedAt { get; set; }
+        public string UploadedAt { get; set; }
 
         /// <summary>
         /// The date when the image was crated.
         /// </summary>
         [JsonProperty("created_at")]
-        public String CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         /// <summary>
         /// The location where the picture was taken.

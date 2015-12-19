@@ -31,13 +31,13 @@ namespace Strava.Clubs
         /// The club's description.
         /// </summary>
         [JsonProperty("description")]
-        public String Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// The club's type.
         /// </summary>
         [JsonProperty("club_type")]
-        private String _clubType { get; set; }
+        private string _clubType { get; set; }
 
         /// <summary>
         /// The club's type.
@@ -63,7 +63,7 @@ namespace Strava.Clubs
         /// The sports type of the club.
         /// </summary>
         [JsonProperty("sport_type")]
-        private String _sportType { get; set; }
+        private string _sportType { get; set; }
 
         /// <summary>
         /// The sports type of the club.
@@ -87,19 +87,19 @@ namespace Strava.Clubs
         /// the club's city.
         /// </summary>
         [JsonProperty("city")]
-        public String City { get; set; }
+        public string City { get; set; }
 
         /// <summary>
         /// The club's state.
         /// </summary>
         [JsonProperty("state")]
-        public String State { get; set; }
+        public string State { get; set; }
 
         /// <summary>
         /// The club's country.
         /// </summary>
         [JsonProperty("country")]
-        public String Country { get; set; }
+        public string Country { get; set; }
 
         /// <summary>
         /// True if the club is a private club.

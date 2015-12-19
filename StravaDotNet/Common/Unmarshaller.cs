@@ -33,9 +33,9 @@ namespace Strava.Common
         /// </summary>
         /// <param name="json">The json string.</param>
         /// <returns>The converted object of type T.</returns>
-        public static T Unmarshal(String json)
+        public static T Unmarshal(string json)
         {
-            if (String.IsNullOrEmpty(json))
+            if (string.IsNullOrEmpty(json))
             {
                 throw new ArgumentException("The json string is null or empty.");
             }

@@ -47,7 +47,7 @@ namespace Strava.Authentication
         /// <summary>
         /// the auth token that was received from the Strava server.
         /// </summary>
-        public String AuthCode { get; set; }
+        public string AuthCode { get; set; }
 
         /// <summary>
         /// Loads an access token asynchronously from the Strava servers. Invoking this method opens a web browser.
@@ -57,9 +57,9 @@ namespace Strava.Authentication
         /// <param name="scope">Define what your application is allowed to do.</param>
         /// <param name="callbackPort">Define the callback port (optional, default value is 1895). Only change this, 
         /// if the default port 1895 is already used on your machine.</param>
-        public void GetTokenAsync(String clientId, String clientSecret, Scope scope, int callbackPort = 1895)
+        public void GetTokenAsync(string clientId, string clientSecret, Scope scope, int callbackPort = 1895)
         {
-            LocalWebServer server = new LocalWebServer(String.Format("http://*:{0}/", callbackPort));
+            LocalWebServer server = new LocalWebServer(string.Format("http://*:{0}/", callbackPort));
             server.ClientId = clientId;
             server.ClientSecret = clientSecret;
 
@@ -83,8 +83,8 @@ namespace Strava.Authentication
 
             server.Start();
 
-            String url = "https://www.strava.com/oauth/authorize";
-            String scopeLevel = String.Empty;
+            string url = "https://www.strava.com/oauth/authorize";
+            string scopeLevel = string.Empty;
 
             switch (scope)
             {
@@ -103,7 +103,7 @@ namespace Strava.Authentication
             }
 
             Process process = new Process();
-            process.StartInfo = new ProcessStartInfo(String.Format("{0}?client_id={1}&response_type=code&redirect_uri=http://localhost:{2}&scope={3}&approval_prompt=auto", url, clientId, callbackPort, scopeLevel));
+            process.StartInfo = new ProcessStartInfo(string.Format("{0}?client_id={1}&response_type=code&redirect_uri=http://localhost:{2}&scope={3}&approval_prompt=auto", url, clientId, callbackPort, scopeLevel));
             process.Start();
         }
     }

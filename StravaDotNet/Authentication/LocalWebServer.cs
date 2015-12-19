@@ -46,12 +46,12 @@ namespace Strava.Authentication
         /// <summary>
         /// The Client Id provided by Strava upon registering your application.
         /// </summary>
-        public String ClientId { get; set; }
+        public string ClientId { get; set; }
 
         /// <summary>
         /// The Client secret provided by Strava upon registering your application.
         /// </summary>
-        public String ClientSecret { get; set; }
+        public string ClientSecret { get; set; }
         
         private HttpListener _httpListener = new HttpListener();
         private HttpListenerContext _context;
@@ -60,7 +60,7 @@ namespace Strava.Authentication
         /// Initializes a new instance of the LocalWebServer class.
         /// </summary>
         /// <param name="prefix">The server prefix.</param>
-        public LocalWebServer(String prefix)
+        public LocalWebServer(string prefix)
         {
             _httpListener = new HttpListener();
             _httpListener.Prefixes.Add(prefix);
@@ -95,9 +95,9 @@ namespace Strava.Authentication
             // Access Token laden
             // 0 = state
             // 1 = code
-            String code = queries.GetValues(1)[0];
+            string code = queries.GetValues(1)[0];
 
-            if (!String.IsNullOrEmpty(code))
+            if (!string.IsNullOrEmpty(code))
             {
                 if (AuthCodeReceived != null)
                 {
@@ -106,8 +106,8 @@ namespace Strava.Authentication
             }
 
             // Save token to hard disk
-            String path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "StravaApi");
-            String file = Path.Combine(path, "AccessToken.auth");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "StravaApi");
+            string file = Path.Combine(path, "AccessToken.auth");
 
             if (!Directory.Exists(path))
             {
@@ -126,12 +126,12 @@ namespace Strava.Authentication
 
 
             // Getting the Access Token
-            String url = String.Format("https://www.strava.com/oauth/token?client_id={0}&client_secret={1}&code={2}", ClientId, ClientSecret, code);
-            String json = await Http.WebRequest.SendPostAsync(new Uri(url));
+            string url = string.Format("https://www.strava.com/oauth/token?client_id={0}&client_secret={1}&code={2}", ClientId, ClientSecret, code);
+            string json = await Http.WebRequest.SendPostAsync(new Uri(url));
 
             AccessToken auth = Unmarshaller<AccessToken>.Unmarshal(json);
 
-            if (!String.IsNullOrEmpty(auth.Token))
+            if (!string.IsNullOrEmpty(auth.Token))
             {
                 if (AccessTokenReceived != null)
                 {

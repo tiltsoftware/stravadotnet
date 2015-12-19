@@ -40,7 +40,7 @@ namespace Strava.Utilities
         /// <param name="dimension">The dimension of the picture which will be returned.</param>
         /// <param name="mapType">Choose the map type of the image.</param>
         /// <returns>An image of your activity on the specified map.</returns>
-        public static async Task<Image> LoadActivityPreviewAsync(String polyline, Dimension dimension, MapType mapType)
+        public static async Task<Image> LoadActivityPreviewAsync(string polyline, Dimension dimension, MapType mapType)
         {
             if (dimension.Width == 0 || dimension.Height == 0)
             {
@@ -48,10 +48,10 @@ namespace Strava.Utilities
             }
 
             List<Coordinate> c = PolylineDecoder.Decode(polyline);
-            String markerStart = String.Format("&markers=icon:http://tinyurl.com/np8ozqm%7C{0},{1}", c.First().Latitude, c.First().Longitude);
-            String markerEnd = String.Format("&markers=icon:http://tinyurl.com/mzj8mvq%7C{0},{1}", c.Last().Latitude, c.Last().Longitude);
+            string markerStart = string.Format("&markers=icon:http://tinyurl.com/np8ozqm%7C{0},{1}", c.First().Latitude, c.First().Longitude);
+            string markerEnd = string.Format("&markers=icon:http://tinyurl.com/mzj8mvq%7C{0},{1}", c.Last().Latitude, c.Last().Longitude);
 
-            String url = String.Format("http://maps.googleapis.com/maps/api/staticmap?sensor=false&maptype={0}&size={1}x{2}&{3}&{4}&path=weight:3|color:red|enc:{5}",
+            string url = string.Format("http://maps.googleapis.com/maps/api/staticmap?sensor=false&maptype={0}&size={1}x{2}&{3}&{4}&path=weight:3|color:red|enc:{5}",
                 mapType.ToString().ToLower(),
                 dimension.Width,
                 dimension.Height,

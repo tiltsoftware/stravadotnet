@@ -31,19 +31,19 @@ namespace Strava.Gear
         /// The gear's brand name.
         /// </summary>
         [JsonProperty("brand_name")]
-        public String Brand { get; set; }
+        public string Brand { get; set; }
 
         /// <summary>
         /// The gear's model.
         /// </summary>
         [JsonProperty("model_name")]
-        public String Model { get; set; }
+        public string Model { get; set; }
 
         /// <summary>
         /// The type of bike.
         /// </summary>
         [JsonProperty("frame_type")]
-        private string _frameType = String.Empty;
+        private string _frameType = string.Empty;
 
         /// <summary>
         /// The type of bike.
@@ -77,6 +77,6 @@ namespace Strava.Gear
         /// The gear's description.
         /// </summary>
         [JsonProperty("description")]
-        public String Description { get; set; }
+        public string Description { get; set; }
     }
 }

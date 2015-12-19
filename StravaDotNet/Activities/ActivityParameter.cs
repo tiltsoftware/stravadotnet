@@ -25,7 +25,7 @@ namespace Strava.Activities
     public enum ActivityParameter
     {
         /// <summary>
-        /// Updates the name of an activity. String values are allowed as parameter.
+        /// Updates the name of an activity. string values are allowed as parameter.
         /// </summary>
         Name,
         /// <summary>

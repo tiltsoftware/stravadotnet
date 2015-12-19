@@ -60,7 +60,7 @@ namespace Strava.Clients
         /// <returns>The activity with the specified id.</returns>
         public async Task<Activity> GetActivityAsync(string id, bool includeEfforts)
         {
-            string getUrl = String.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
+            string getUrl = string.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
             string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
@@ -97,14 +97,14 @@ namespace Strava.Clients
         /// <param name="elapsedSeconds">The elapsed time in seconds.</param>
         /// <param name="description">The description (otpional).</param>
         /// <param name="distance">The distance of the activity (optional).</param>
-        public async Task<Activity> CreateActivityAsync(String name, ActivityType type, String timeString, int elapsedSeconds, String description, float distance = 0f)
+        public async Task<Activity> CreateActivityAsync(string name, ActivityType type, string timeString, int elapsedSeconds, string description, float distance = 0f)
         {
-            String t = type.ToString().ToLower();
+            string t = type.ToString().ToLower();
 
-            String postUrl = String.Format("https://www.strava.com/api/v3/activities?name={0}&type={1}&start_date_local={2}&elapsed_time={3}&description={4}&distance={5}&access_token={6}",
+            string postUrl = string.Format("https://www.strava.com/api/v3/activities?name={0}&type={1}&start_date_local={2}&elapsed_time={3}&description={4}&distance={5}&access_token={6}",
                 name, t, timeString, elapsedSeconds, description, distance.ToString(CultureInfo.InvariantCulture), Authentication.AccessToken);
 
-            String json = await Http.WebRequest.SendPostAsync(new Uri(postUrl));
+            string json = await Http.WebRequest.SendPostAsync(new Uri(postUrl));
             return Unmarshaller<Activity>.Unmarshal(json);
         }
 
@@ -154,7 +154,7 @@ namespace Strava.Clients
             //Calculate the UNIX epoch
             long secondsBefore = DateConverter.GetSecondsSinceUnixEpoch(before);
 
-            String getUrl = String.Format("{0}?before={1}&page={2}&per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}?before={1}&page={2}&per_page={3}&access_token={4}",
                 Endpoints.Activities,
                 secondsBefore,
                 page,
@@ -162,7 +162,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -213,7 +213,7 @@ namespace Strava.Clients
             //Calculate the UNIX epoch
             long secondsAfter = DateConverter.GetSecondsSinceUnixEpoch(after);
 
-            String getUrl = String.Format("{0}?after={1}&page={2}&per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}?after={1}&page={2}&per_page={3}&access_token={4}",
                 Endpoints.Activities,
                 secondsAfter,
                 page,
@@ -221,7 +221,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -231,10 +231,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava Id of the activity.</param>
         /// <returns>A list of comments.</returns>
-        public async Task<List<Comment>> GetCommentsAsync(String activityId)
+        public async Task<List<Comment>> GetCommentsAsync(string activityId)
         {
-            String getUrl = String.Format("{0}/{1}/comments?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/comments?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<Comment>>.Unmarshal(json);
         }
@@ -243,10 +243,10 @@ namespace Strava.Clients
         /// Deletes an activity on Strava.
         /// </summary>
         /// <param name="activityId">The Strava Id of the activity to delete.</param>
-        public async void DeleteActivity(String activityId)
+        public async void DeleteActivity(string activityId)
         {
 
-            String deleteUrl = String.Format("https://www.strava.com/api/v3/activities/{0}?access_token={1}", activityId, Authentication.AccessToken);
+            string deleteUrl = string.Format("https://www.strava.com/api/v3/activities/{0}?access_token={1}", activityId, Authentication.AccessToken);
 
             await Http.WebRequest.SendDeleteAsync(new Uri(deleteUrl));
         }
@@ -256,10 +256,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava Id of the activity.</param>
         /// <returns>A list of athletes that kudoed the specified activity.</returns>
-        public async Task<List<Athlete>> GetKudosAsync(String activityId)
+        public async Task<List<Athlete>> GetKudosAsync(string activityId)
         {
-            String getUrl = String.Format("{0}/{1}/kudos?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/kudos?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<Athlete>>.Unmarshal(json);
         }
@@ -269,10 +269,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava activity Id.</param>
         /// <returns>A list of activity zones of an activity.</returns>
-        public async Task<List<ActivityZone>> GetActivityZonesAsync(String activityId)
+        public async Task<List<ActivityZone>> GetActivityZonesAsync(string activityId)
         {
-            String getUrl = String.Format("{0}/{1}/zones?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/zones?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityZone>>.Unmarshal(json);
         }
@@ -285,8 +285,8 @@ namespace Strava.Clients
         /// <returns>A list of activities.</returns>
         public async Task<List<ActivitySummary>> GetActivitiesAsync(int page, int perPage)
         {
-            String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.Activities, page, perPage, Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.Activities, page, perPage, Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -299,8 +299,8 @@ namespace Strava.Clients
         /// <returns>A list of activities from your followers.</returns>
         public async Task<List<ActivitySummary>> GetFollowersActivitiesAsync(int page, int perPage)
         {
-            String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.ActivitiesFollowers, page, perPage, Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = string.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.ActivitiesFollowers, page, perPage, Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -391,9 +391,9 @@ namespace Strava.Clients
         /// <param name="parameter">The parameter that will be updated.</param>
         /// <param name="value">The value the parameter is updated to.</param>
         /// <returns>A detailed representation of the updated activity.</returns>
-        public async Task<Activity> UpdateActivityAsync(String activityId, ActivityParameter parameter, String value)
+        public async Task<Activity> UpdateActivityAsync(string activityId, ActivityParameter parameter, string value)
         {
-            String param = String.Empty;
+            string param = string.Empty;
 
             switch (parameter)
             {
@@ -417,14 +417,14 @@ namespace Strava.Clients
                     break;
             }
 
-            String putUrl = String.Format("{0}/{1}?{2}={3}&access_token={4}",
+            string putUrl = string.Format("{0}/{1}?{2}={3}&access_token={4}",
                 Endpoints.Activity,
                 activityId,
                 param,
                 value,
                 Authentication.AccessToken);
 
-            String json = await Http.WebRequest.SendPutAsync(new Uri(putUrl));
+            string json = await Http.WebRequest.SendPutAsync(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -435,15 +435,15 @@ namespace Strava.Clients
         /// <param name="activityId">The Strava id of the activity.</param>
         /// <param name="type">The type you want to change the activity to.</param>
         /// <returns>A detailed object of the activity that was updated. Remember that the changed type won't be updated immediately.</returns>
-        public async Task<Activity> UpdateActivityTypeAsync(String activityId, ActivityType type)
+        public async Task<Activity> UpdateActivityTypeAsync(string activityId, ActivityType type)
         {
-            String putUrl = String.Format("{0}/{1}?type={2}&access_token={3}",
+            string putUrl = string.Format("{0}/{1}?type={2}&access_token={3}",
                 Endpoints.Activity,
                 activityId,
                 type,
                 Authentication.AccessToken);
 
-            String json = await Http.WebRequest.SendPutAsync(new Uri(putUrl));
+            string json = await Http.WebRequest.SendPutAsync(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -565,14 +565,14 @@ namespace Strava.Clients
         /// <returns>A list of activities that was recorded between 'after' and 'before'.</returns>
         public async Task<List<ActivitySummary>> GetActivitiesAsync(DateTime after, DateTime before, int page, int perPage)
         {
-            String getUrl = String.Format("{0}?after={1}&before={2}&page={3}&per_page={4}&access_token={5}",
+            string getUrl = string.Format("{0}?after={1}&before={2}&page={3}&per_page={4}&access_token={5}",
                 Endpoints.Activities,
                 DateConverter.GetSecondsSinceUnixEpoch(after),
                 DateConverter.GetSecondsSinceUnixEpoch(before),
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -685,15 +685,15 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The activity</param>
         /// <returns>A list of photos.</returns>
-        public async Task<List<Photo>> GetPhotosAsync(String activityId)
+        public async Task<List<Photo>> GetPhotosAsync(string activityId)
         {
             // https://www.strava.com/api/v3/activities/:id/photos
-            String getUrl = String.Format("{0}/{1}/photos?access_token={2}",
+            string getUrl = string.Format("{0}/{1}/photos?access_token={2}",
                 Endpoints.Activity,
                 activityId,
                 Authentication.AccessToken);
 
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<Photo>>.Unmarshal(json);
         }
@@ -703,15 +703,15 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava id of the activity.</param>
         /// <returns>A list of laps of the activity.</returns>
-        public async Task<List<ActivityLap>> GetActivityLapsAsync(String activityId)
+        public async Task<List<ActivityLap>> GetActivityLapsAsync(string activityId)
         {
             // https://www.strava.com/api/v3/activities/:id/laps
-            String getUrl = String.Format("{0}/{1}/laps?access_token={2}",
+            string getUrl = string.Format("{0}/{1}/laps?access_token={2}",
                 Endpoints.Activity,
                 activityId,
                 Authentication.AccessToken);
 
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityLap>>.Unmarshal(json);
         }
@@ -720,9 +720,9 @@ namespace Strava.Clients
         /// Give kudos for the specified activity.
         /// </summary>
         /// <param name="activityId">The activity you want to give kudos for.</param>
-        public async void GiveKudos(String activityId)
+        public async void GiveKudos(string activityId)
         {
-            String postUrl = String.Format("{0}/{1}/kudos?access_token={2}",
+            string postUrl = string.Format("{0}/{1}/kudos?access_token={2}",
                 Endpoints.Activity,
                 activityId,
                 Authentication.AccessToken);
@@ -735,9 +735,9 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava ID of the activity you want to comment.</param>
         /// <param name="text">The text that will be posted.</param>
-        public async void PostComment(String activityId, String text)
+        public async void PostComment(string activityId, string text)
         {
-            String postUrl = String.Format("{0}/{1}/comments?text={2}&access_token={3}",
+            string postUrl = string.Format("{0}/{1}/comments?text={2}&access_token={3}",
                 Endpoints.Activity,
                 activityId,
                 text,
@@ -756,10 +756,10 @@ namespace Strava.Clients
         /// <param name="id">The Strava activity id.</param>
         /// <param name="includeEfforts">Indicates whether efforts are included in the result or not.</param>
         /// <returns>The activity with the specified id.</returns>
-        public Activity GetActivity(String id, bool includeEfforts)
+        public Activity GetActivity(string id, bool includeEfforts)
         {
-            String getUrl = String.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }        
@@ -810,7 +810,7 @@ namespace Strava.Clients
             //Calculate the UNIX epoch
             long secondsBefore = DateConverter.GetSecondsSinceUnixEpoch(before);
 
-            String getUrl = String.Format("{0}?before={1}&page={2}&per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}?before={1}&page={2}&per_page={3}&access_token={4}",
                 Endpoints.Activities,
                 secondsBefore,
                 page,
@@ -818,7 +818,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -869,7 +869,7 @@ namespace Strava.Clients
             //Calculate the UNIX epoch
             long secondsAfter = DateConverter.GetSecondsSinceUnixEpoch(after);
 
-            String getUrl = String.Format("{0}?after={1}&page={2}&per_page={3}&access_token={4}",
+            string getUrl = string.Format("{0}?after={1}&page={2}&per_page={3}&access_token={4}",
                 Endpoints.Activities,
                 secondsAfter,
                 page,
@@ -877,7 +877,7 @@ namespace Strava.Clients
                 Authentication.AccessToken
                 );
 
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -887,10 +887,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava Id of the activity.</param>
         /// <returns>A list of comments.</returns>
-        public List<Comment> GetComments(String activityId)
+        public List<Comment> GetComments(string activityId)
         {
-            String getUrl = String.Format("{0}/{1}/comments?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/comments?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<Comment>>.Unmarshal(json);
         }
@@ -900,10 +900,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava Id of the activity.</param>
         /// <returns>A list of athletes that kudoed the specified activity.</returns>
-        public List<Athlete> GetKudos(String activityId)
+        public List<Athlete> GetKudos(string activityId)
         {
-            String getUrl = String.Format("{0}/{1}/kudos?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/kudos?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<Athlete>>.Unmarshal(json);
         }
@@ -913,10 +913,10 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava activity Id.</param>
         /// <returns>A list of activity zones of an activity.</returns>
-        public List<ActivityZone> GetActivityZones(String activityId)
+        public List<ActivityZone> GetActivityZones(string activityId)
         {
-            String getUrl = String.Format("{0}/{1}/zones?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}/{1}/zones?access_token={2}", Endpoints.Activity, activityId, Authentication.AccessToken);
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityZone>>.Unmarshal(json);
         }
@@ -929,8 +929,8 @@ namespace Strava.Clients
         /// <returns>A list of activities.</returns>
         public List<ActivitySummary> GetActivities(int page, int perPage)
         {
-            String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.Activities, page, perPage, Authentication.AccessToken);
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.Activities, page, perPage, Authentication.AccessToken);
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -980,14 +980,14 @@ namespace Strava.Clients
         /// <returns>A list of activities that was recorded between 'after' and 'before'.</returns>
         public List<ActivitySummary> GetActivities(DateTime after, DateTime before, int page, int perPage)
         {
-            String getUrl = String.Format("{0}?after={1}&before={2}&page={3}&per_page={4}&access_token={5}",
+            string getUrl = string.Format("{0}?after={1}&before={2}&page={3}&per_page={4}&access_token={5}",
                 Endpoints.Activities,
                 DateConverter.GetSecondsSinceUnixEpoch(after),
                 DateConverter.GetSecondsSinceUnixEpoch(before),
                 page,
                 perPage,
                 Authentication.AccessToken);
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -1000,8 +1000,8 @@ namespace Strava.Clients
         /// <returns>A list of activities from your followers.</returns>
         public List<ActivitySummary> GetFollowersActivities(int page, int perPage)
         {
-            String getUrl = String.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.ActivitiesFollowers, page, perPage, Authentication.AccessToken);
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string getUrl = string.Format("{0}?page={1}&per_page={2}&access_token={3}", Endpoints.ActivitiesFollowers, page, perPage, Authentication.AccessToken);
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
         }
@@ -1090,15 +1090,15 @@ namespace Strava.Clients
         /// <param name="activityId">The Strava id of the activity.</param>
         /// <param name="type">The type you want to change the activity to.</param>
         /// <returns>A detailed object of the activity that was updated. Remember that the changed type won't be updated immediately.</returns>
-        public Activity UpdateActivityType(String activityId, ActivityType type)
+        public Activity UpdateActivityType(string activityId, ActivityType type)
         {
-            String putUrl = String.Format("{0}/{1}?type={2}&access_token={3}",
+            string putUrl = string.Format("{0}/{1}?type={2}&access_token={3}",
                 Endpoints.Activity,
                 activityId,
                 type,
                 Authentication.AccessToken);
 
-            String json = Http.WebRequest.SendPut(new Uri(putUrl));
+            string json = Http.WebRequest.SendPut(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -1110,9 +1110,9 @@ namespace Strava.Clients
         /// <param name="parameter">The parameter that will be updated.</param>
         /// <param name="value">The value the parameter is updated to.</param>
         /// <returns>A detailed representation of the updated activity.</returns>
-        public Activity UpdateActivity(String activityId, ActivityParameter parameter, String value)
+        public Activity UpdateActivity(string activityId, ActivityParameter parameter, string value)
         {
-            String param = String.Empty;
+            string param = string.Empty;
 
             switch (parameter)
             {
@@ -1136,14 +1136,14 @@ namespace Strava.Clients
                     break;
             }
 
-            String putUrl = String.Format("{0}/{1}?{2}={3}&access_token={4}",
+            string putUrl = string.Format("{0}/{1}?{2}={3}&access_token={4}",
                 Endpoints.Activity,
                 activityId,
                 param,
                 value,
                 Authentication.AccessToken);
 
-            String json = Http.WebRequest.SendPut(new Uri(putUrl));
+            string json = Http.WebRequest.SendPut(new Uri(putUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -1331,15 +1331,15 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The activity</param>
         /// <returns>A list of photos.</returns>
-        public List<Photo> GetPhotos(String activityId)
+        public List<Photo> GetPhotos(string activityId)
         {
             // https://www.strava.com/api/v3/activities/:id/photos
-            String getUrl = String.Format("{0}/{1}/photos?access_token={2}",
+            string getUrl = string.Format("{0}/{1}/photos?access_token={2}",
                 Endpoints.Activity,
                 activityId,
                 Authentication.AccessToken);
 
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<Photo>>.Unmarshal(json);
         }
@@ -1349,14 +1349,14 @@ namespace Strava.Clients
         /// </summary>
         /// <param name="activityId">The Strava id of the activity.</param>
         /// <returns>A list of laps of the activity.</returns>
-        public List<ActivityLap> GetActivityLaps(String activityId)
+        public List<ActivityLap> GetActivityLaps(string activityId)
         {
-            String getUrl = String.Format("{0}/{1}/laps?access_token={2}",
+            string getUrl = string.Format("{0}/{1}/laps?access_token={2}",
                 Endpoints.Activity,
                 activityId,
                 Authentication.AccessToken);
 
-            String json = Http.WebRequest.SendGet(new Uri(getUrl));
+            string json = Http.WebRequest.SendGet(new Uri(getUrl));
 
             return Unmarshaller<List<ActivityLap>>.Unmarshal(json);
         }

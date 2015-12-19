@@ -34,7 +34,7 @@ namespace Strava.Streams
         /// The type of stream.
         /// </summary>
         [JsonProperty("type")]
-        private String Type { get; set; }
+        private string Type { get; set; }
 
         /// <summary>
         /// The type of stream.
@@ -98,7 +98,7 @@ namespace Strava.Streams
         /// Series type used for down sampling, will be present even if not used.
         /// </summary>
         [JsonProperty("series_type")]
-        public String SeriesType { get; set; }
+        public string SeriesType { get; set; }
 
         /// <summary>
         /// Complete stream length

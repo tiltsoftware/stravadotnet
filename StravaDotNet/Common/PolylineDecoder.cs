@@ -33,10 +33,10 @@ namespace Strava.Common
         /// </summary>
         /// <param name="encodedPoints">The encoded polyline.</param>
         /// <returns>A list of coordinates.</returns>
-        public static List<Coordinate> Decode(String encodedPoints)
+        public static List<Coordinate> Decode(string encodedPoints)
         {
             {
-                if (String.IsNullOrEmpty(encodedPoints))
+                if (string.IsNullOrEmpty(encodedPoints))
                     return null;
 
                 List<Coordinate> poly = new List<Coordinate>();
@@ -88,7 +88,7 @@ namespace Strava.Common
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(String.Format("Error: Decoding polyline: {0}", ex.Message));
+                    Debug.WriteLine(string.Format("Error: Decoding polyline: {0}", ex.Message));
                 }
 
                 return poly;

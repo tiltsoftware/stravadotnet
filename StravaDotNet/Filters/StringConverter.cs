@@ -31,7 +31,7 @@ namespace Strava.Filters
         /// </summary>
         /// <param name="filter">The filter.</param>
         /// <returns>The appropriate string for the specified filter.</returns>
-        public static String TimeFilterToString(TimeFilter filter)
+        public static string TimeFilterToString(TimeFilter filter)
         {
             switch (filter)
             {
@@ -45,7 +45,7 @@ namespace Strava.Filters
                     return "today";
 
                 default:
-                    return String.Empty;
+                    return string.Empty;
 
             }
         }
@@ -55,7 +55,7 @@ namespace Strava.Filters
         /// </summary>
         /// <param name="gender">The gender filter.</param>
         /// <returns>The appropriate string for the specified filter.</returns>
-        public static String GenderFilterToString(GenderFilter gender)
+        public static string GenderFilterToString(GenderFilter gender)
         {
             switch (gender)
             {
@@ -65,7 +65,7 @@ namespace Strava.Filters
                     return "F";
 
                 default:
-                    return String.Empty;
+                    return string.Empty;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Strava.Filters
         /// </summary>
         /// <param name="age">The age filter.</param>
         /// <returns>The appropriate string for the specified filter.</returns>
-        public static String AgeFilterToString(AgeFilter age)
+        public static string AgeFilterToString(AgeFilter age)
         {
             switch (age)
             {
@@ -92,7 +92,7 @@ namespace Strava.Filters
                     return "65_plus";
 
                 default:
-                    return String.Empty;
+                    return string.Empty;
             }
         }
 
@@ -101,7 +101,7 @@ namespace Strava.Filters
         /// </summary>
         /// <param name="weight">The weight class.</param>
         /// <returns>The appropriate string for the specified weight class.</returns>
-        public static String WeightFilterToString(WeightFilter weight)
+        public static string WeightFilterToString(WeightFilter weight)
         {
             switch (weight)
             {
@@ -119,7 +119,7 @@ namespace Strava.Filters
                     return "95_plus";
 
                 default:
-                    return String.Empty;
+                    return string.Empty;
             }
         }
     }

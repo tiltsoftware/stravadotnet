@@ -43,18 +43,18 @@ namespace Strava.Clubs
         /// The name of the club.
         /// </summary>
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Url to a 62x62 pixel picture of the club. Use the ImageLoader class to load the picture.
         /// </summary>
         [JsonProperty("profile_medium")]
-        public String ProfileMedium { get; set; }
+        public string ProfileMedium { get; set; }
 
         /// <summary>
         /// Url to a 124x124 pixel picture of the club. Use the ImageLoader class to load the picture.
         /// </summary>
         [JsonProperty("profile")]
-        public String Profile { get; set; }
+        public string Profile { get; set; }
     }
 }

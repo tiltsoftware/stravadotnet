@@ -53,7 +53,7 @@ namespace Strava.Common
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("({0}, {1})", Latitude, Longitude);
+            return string.Format("({0}, {1})", Latitude, Longitude);
         }
     }
 }

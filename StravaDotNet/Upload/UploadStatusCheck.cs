@@ -32,8 +32,8 @@ namespace Strava.Upload
     {
         private readonly Timer _timer;
         private CheckStatus _currentStatus;
-        private readonly String _token;
-        private readonly String _uploadId;
+        private readonly string _token;
+        private readonly string _uploadId;
 
         /// <summary>
         /// Indicates whether the activity is processed.
@@ -49,7 +49,7 @@ namespace Strava.Upload
         /// <summary>
         /// This attribute contains details about the error.
         /// </summary>
-        public String ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; }
 
         #region Events
 
@@ -78,7 +78,7 @@ namespace Strava.Upload
         /// <summary>
         /// Initializes a new instance of the UploadStatusCheck class.
         /// </summary>
-        public UploadStatusCheck(String accessToken, string uploadId)
+        public UploadStatusCheck(string accessToken, string uploadId)
         {
             _timer = new Timer(1000D);
             _timer.Elapsed += TimerTick;

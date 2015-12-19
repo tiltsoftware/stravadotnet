@@ -81,7 +81,7 @@ namespace Strava.Clients
             FileInfo info = new FileInfo(filePath);
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", String.Format("Bearer {0}", Authentication.AccessToken));
+            client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", Authentication.AccessToken));
 
             MultipartFormDataContent content = new MultipartFormDataContent();
 

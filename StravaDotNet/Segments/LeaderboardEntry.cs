@@ -31,7 +31,7 @@ namespace Strava.Activities
         /// The full name of the athlete.
         /// </summary>
         [JsonProperty("athlete_name")]
-        public String AthleteName { get; set; }
+        public string AthleteName { get; set; }
 
         /// <summary>
         /// The athlete id. Use this id to load additional information about the athlete.
@@ -43,7 +43,7 @@ namespace Strava.Activities
         /// The athlete's gender.
         /// </summary>
         [JsonProperty("athlete_gender")]
-        public String AthleteGender { get; set; }
+        public string AthleteGender { get; set; }
 
         /// <summary>
         /// The average heartrate.
@@ -79,13 +79,13 @@ namespace Strava.Activities
         /// The start date.
         /// </summary>
         [JsonProperty("start_date")]
-        public String StartDate { get; set; }
+        public string StartDate { get; set; }
 
         /// <summary>
         /// Local start date.
         /// </summary>
         [JsonProperty("start_date_local")]
-        public String StartDateLocal { get; set; }
+        public string StartDateLocal { get; set; }
 
         /// <summary>
         /// Returns the StartDate-Property as a DateTime object.
@@ -141,7 +141,7 @@ namespace Strava.Activities
         /// Url to a picture of the athlete. If not null or empty, you can use the ImageLoader to load the picture from the Url.
         /// </summary>
         [JsonProperty("athlete_profile")]
-        public String AthleteProfile { get; set; }
+        public string AthleteProfile { get; set; }
 
         /// <summary>
         /// Returns the total seconds in a more convenient TimeSpan object.
@@ -160,7 +160,7 @@ namespace Strava.Activities
         /// <returns>Entry as string.</returns>
         public override string ToString()
         {
-            return String.Format("{0}:\t{1}:{2}:{3}\t{4}",
+            return string.Format("{0}:\t{1}:{2}:{3}\t{4}",
                 Rank,
                 Time.Hours.ToString("D2"),
                 Time.Minutes.ToString("D2"),
