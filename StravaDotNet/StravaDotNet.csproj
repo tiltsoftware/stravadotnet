@@ -60,6 +60,7 @@
     <Compile Include="Activities\Comment.cs" />
     <Compile Include="Activities\DistributionBucket.cs" />
     <Compile Include="Routes\Route.cs" />
+    <Compile Include="Routes\SubType.cs" />
     <Compile Include="Segments\Leaderboard.cs" />
     <Compile Include="Segments\LeaderboardEntry.cs" />
     <Compile Include="Activities\LeaderboardParameter.cs" />

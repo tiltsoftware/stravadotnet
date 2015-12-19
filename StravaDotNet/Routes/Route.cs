@@ -20,6 +20,8 @@
 using Newtonsoft.Json;
 using Strava.Activities;
 using Strava.Athletes;
+using Strava.Segments;
+using System.Collections.Generic;
 
 namespace Strava.Routes
 {
@@ -52,16 +54,24 @@ namespace Strava.Routes
         [JsonProperty("resource_state")]
         public int ResourceState { get; set; }
 
+        public SubType SubType
+        {
+            get { return (SubType)sub_type; }
+        }
+
         [JsonProperty("starred")]
         public bool IsStarred { get; set; }
 
         [JsonProperty("sub_type")]
-        public int SubType { get; set; }
+        private int sub_type { get; set; }
 
         [JsonProperty("timestamp")]
         public int Timestamp { get; set; }
 
         [JsonProperty("type")]
         public int Type { get; set; }
+
+        [JsonProperty("segments")]
+        public List<Segment> Segments { get; set; }
     }
 }

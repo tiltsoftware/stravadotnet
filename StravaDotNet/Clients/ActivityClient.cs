@@ -58,10 +58,10 @@ namespace Strava.Clients
         /// <param name="id">The Strava activity id.</param>
         /// <param name="includeEfforts">Used to include all segment efforts in the result.</param>
         /// <returns>The activity with the specified id.</returns>
-        public async Task<Activity> GetActivityAsync(String id, bool includeEfforts)
+        public async Task<Activity> GetActivityAsync(string id, bool includeEfforts)
         {
-            String getUrl = String.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
-            String json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+            string getUrl = String.Format("{0}/{1}?include_all_efforts={2}&access_token={3}", Endpoints.Activity, id, includeEfforts, Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
 
             return Unmarshaller<Activity>.Unmarshal(json);
         }
@@ -75,15 +75,16 @@ namespace Strava.Clients
         /// <param name="elapsedSeconds">The elapsed time in seconds.</param>
         /// <param name="description">The description (otpional).</param>
         /// <param name="distance">The distance of the activity (optional).</param>
-        public async Task<Activity> CreateActivityAsync(String name, ActivityType type, DateTime dateTime, int elapsedSeconds, String description, float distance = 0f)
+        public async Task<Activity> CreateActivityAsync(string name, ActivityType type, DateTime dateTime, int elapsedSeconds, string description, float distance = 0f)
         {
-            String t = type.ToString().ToLower();
-            String timeString = dateTime.ToString("o");
+            string t = type.ToString().ToLower();
+            string timeString = dateTime.ToString("o");
 
-            String postUrl = String.Format("https://www.strava.com/api/v3/activities?name={0}&type={1}&start_date_local={2}&elapsed_time={3}&description={4}&distance={5}&access_token={6}",
+            string postUrl = string.Format("https://www.strava.com/api/v3/activities?name={0}&type={1}&start_date_local={2}&elapsed_time={3}&description={4}&distance={5}&access_token={6}",
                 name, t, timeString, elapsedSeconds, description, distance.ToString(CultureInfo.InvariantCulture), Authentication.AccessToken);
             
-            String json = await Http.WebRequest.SendPostAsync(new Uri(postUrl));
+            string json = await Http.WebRequest.SendPostAsync(new Uri(postUrl));
+
             return Unmarshaller<Activity>.Unmarshal(json);
         }
 

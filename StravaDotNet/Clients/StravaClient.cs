@@ -81,6 +81,7 @@ namespace Strava.Clients
                 Uploads = new UploadClient(authenticator);
                 Efforts = new EffortClient(authenticator);
                 Stats = new StatsClient(authenticator);
+                Routes = new RouteClient(authenticator);
             }
             else
             {
@@ -134,6 +135,11 @@ namespace Strava.Clients
         /// The EffortClient is used to receive efforts on a segment.
         /// </summary>
         public EffortClient Efforts { get; set; }
+
+        /// <summary>
+        /// Predefined RouteClient.
+        /// </summary>
+        public RouteClient Routes { get; set; }
 
         #endregion
 
