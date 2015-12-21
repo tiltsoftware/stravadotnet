@@ -57,6 +57,19 @@ namespace Strava.Activities
         }
 
         /// <summary>
+        /// The suffer score.
+        /// </summary>
+        [JsonProperty("suffer_score")]
+        public int SufferScore { get; set; }
+
+        /// <summary>
+        /// The token used to embed a Strava activity in the form www.strava.com/activities/[activity_id]/embed/[embed_token].
+        /// Only included if requesting athlete is activity owner.
+        /// </summary>
+        [JsonProperty("embed_token")]
+        public string EmbedToken { get; set; }
+
+        /// <summary>
         /// The distance travelled.
         /// </summary>
         [JsonProperty("distance")]
@@ -109,24 +122,6 @@ namespace Strava.Activities
         /// </summary>
         [JsonProperty("truncated")]
         public int? Truncated { get; set; }
-
-        /// <summary>
-        /// The city where this activity was started.
-        /// </summary>
-        [JsonProperty("city")]
-        public string City { get; set; }
-
-        /// <summary>
-        /// The state where this activity was started.
-        /// </summary>
-        [JsonProperty("state")]
-        public string State { get; set; }
-
-        /// <summary>
-        /// The country where this activity was started.
-        /// </summary>
-        [JsonProperty("country")]
-        public string Country { get; set; }
 
         /// <summary>
         /// The id of the gear used.
