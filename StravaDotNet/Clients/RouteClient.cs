@@ -42,34 +42,25 @@ namespace Strava.Clients
         /// Retrieves all the routes of the specified athlete.
         /// </summary>
         /// <returns>All the routes of the athlete with the specified Strava Athlete Id.</returns>
-        public async Task<List<Route>> GetRoutes(long athleteId)
+        public List<Route> GetRoutes(long athleteId)
         {
             string getUrl = string.Format("{0}?access_token={1}", string.Format(Endpoints.Routes, athleteId), Authentication.AccessToken);
-            string json = await Http.WebRequest.SendGetAsync(new System.Uri(getUrl));
+            string json = Http.WebRequest.SendGet(new System.Uri(getUrl));
 
             return Unmarshaller<List<Route>>.Unmarshal(json);
         }
-
-        /// <summary>
-        /// Retrieves all the routes of the currently authenticated athlete.
-        /// </summary>
-        /// <returns>All the routes of the currently authenticated athlete.</returns>
-        public async Task<List<Route>> GetRoutes()
-        {
-            AthleteClient athleteClient = new AthleteClient(Authentication);
-            Athlete athlete = await athleteClient.GetAthleteAsync();
-
-            return await GetRoutes(athlete.Id);
-        }        
 
         /// <summary>
         /// Get the route with the specified id. Private routes can not be received by other athletes than the owner.
         /// </summary>
         /// <param name="routeId">The Strava route id.</param>
         /// <returns>The Strava route with the specified id.</returns>
-        public async Task<Route> GetRoute(long routeId)
+        public Route GetRoute(long routeId)
         {
-            return null;
+            string getUrl = string.Format("{0}{1}?access_token={2}", Endpoints.Route, routeId, Authentication.AccessToken);
+            string json = Http.WebRequest.SendGet(new System.Uri(getUrl));
+
+            return Unmarshaller<Route>.Unmarshal(json);
         }
     }
 }

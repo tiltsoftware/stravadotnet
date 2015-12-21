@@ -50,6 +50,7 @@ namespace Strava.Clients
         /// <param name="filePath">The path to the activity file on your local hard disk.</param>
         /// <param name="dataFormat">The format of the file.</param>
         /// <param name="activityType">The type of the activity.</param>
+        /// <param name="isCommute">Set to true if this is a commute ride. Default is false.</param>
         /// <returns>The status of the upload.</returns>
         public async Task<UploadStatus> UploadActivityAsync(string filePath, DataFormat dataFormat, ActivityType activityType = ActivityType.Ride, bool isCommute = false)
         {

@@ -88,6 +88,9 @@ namespace Strava.Segments
         [JsonProperty("climb_category")]
         public int Category { get; set; }
 
+        /// <summary>
+        /// The category of this climb.
+        /// </summary>
         public ClimbCategory ClimbCategory
         {
             get

@@ -86,5 +86,10 @@ namespace Strava.Api
         /// Url to the Routes endpoint used for the currently authenticated athlete.
         /// </summary>
         public const string Routes = "https://www.strava.com/api/v3/athletes/{0}/routes";
+        /// <summary>
+        /// Url to the Routes endpoint used for the currently authenticated athlete.
+        /// </summary>
+        public const string Route = "https://www.strava.com/api/v3/routes/";
+        
     }
 }

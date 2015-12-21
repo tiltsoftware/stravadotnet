@@ -25,52 +25,97 @@ using System.Collections.Generic;
 
 namespace Strava.Routes
 {
+    /// <summary>
+    /// This class represents a route created on Strava.
+    /// </summary>
     public class Route
     {
+        /// <summary>
+        /// The athlete who created this route.
+        /// </summary>
         [JsonProperty("athlete")]
         public Athlete Athlete { get; set; }
 
+        /// <summary>
+        /// Description of the route.
+        /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        /// <summary>
+        /// Total distance of the route.
+        /// </summary>
         [JsonProperty("distance")]
         public double Distance { get; set; }
 
+        /// <summary>
+        /// Total elevation gain of the route.
+        /// </summary>
         [JsonProperty("elevation_gain")]
         public double Elevation { get; set; }
 
+        /// <summary>
+        /// The type of the route.
+        /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// This object contains data about the map (summary and full data).
+        /// </summary>
         [JsonProperty("map")]
         public Map Map { get; set; }
 
+        /// <summary>
+        /// The name of the route.
+        /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// True if the route is private.
+        /// </summary>
         [JsonProperty("@private")]
         public bool IsPrivate { get; set; }
 
+        /// <summary>
+        /// The Resource state.
+        /// </summary>
         [JsonProperty("resource_state")]
         public int ResourceState { get; set; }
 
+        /// <summary>
+        /// The type of the route. See <see cref="SubType"/> class.
+        /// </summary>
         public SubType SubType
         {
             get { return (SubType)sub_type; }
         }
 
+        /// <summary>
+        /// True if the route is starred.
+        /// </summary>
         [JsonProperty("starred")]
         public bool IsStarred { get; set; }
 
         [JsonProperty("sub_type")]
         private int sub_type { get; set; }
 
+        /// <summary>
+        /// The timestamp when this route was created.
+        /// </summary>
         [JsonProperty("timestamp")]
         public int Timestamp { get; set; }
 
+        /// <summary>
+        /// The type of the route.
+        /// </summary>
         [JsonProperty("type")]
         public int Type { get; set; }
 
+        /// <summary>
+        /// Contains a list of all segments this route is traversing. This may be null if you load routes from another athlete.
+        /// </summary>
         [JsonProperty("segments")]
         public List<Segment> Segments { get; set; }
     }
