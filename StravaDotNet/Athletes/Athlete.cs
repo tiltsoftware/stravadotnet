@@ -43,6 +43,12 @@ namespace Strava.Athletes
         public int FriendCount { get; set; }
 
         /// <summary>
+        /// The weight of the athlete.
+        /// </summary>
+        [JsonProperty("weight")]
+        public float? Weight { get; set; }
+
+        /// <summary>
         /// The count of the athlete's friends that both this athlete and the currently authenticated athlete are following.
         /// </summary>
         [JsonProperty("mutual_friend_count")]
