@@ -87,7 +87,7 @@ namespace Strava.Activities
         }
 
         [JsonProperty("start_date")]
-        private string _start;
+        private string _start = null;
 
         /// <summary>
         /// The date and time when the lap was started.
