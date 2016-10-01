@@ -52,5 +52,27 @@ namespace Strava.Activities
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// A list of best efforts for activity.
+        /// </summary>
+        [JsonProperty("best_efforts")]
+        public List<BestEffort> BestEfforts { get; set; }
+
+        /// <summary>
+        /// he name of the device used to record the activity.
+        /// </summary>
+        [JsonProperty("device_name")]
+        public string DeviceName { get; set; }
+
+   
+        /* ToAdd :
+        splits_metric
+        splits_standard
+        device_name
+        photos
+
+
+    */
     }
 }
