@@ -9,7 +9,7 @@ namespace Strava.Activities
     public class BestEffortActivity
     {
         /// <summary>
-        /// Gets or sets activity identifier
+        /// Gets or sets activity id
         /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }

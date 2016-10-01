@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 namespace Strava.Activities
 {
     /// <summary>
-    /// Array of best effort summaries 
-    /// Running activities only    
+    /// Best effort summaries   
     /// </summary>
     public class BestEffort
     {
@@ -34,7 +33,7 @@ namespace Strava.Activities
         public int ResourceState { get; set; }
 
         /// <summary>
-        /// Name of effort. E.g. 400m - for 400 meter.
+        /// Name of effort (400k, 1 mile, etc etc)
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
