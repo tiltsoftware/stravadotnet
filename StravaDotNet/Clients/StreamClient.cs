@@ -187,7 +187,7 @@ namespace Strava.Clients
                 );
 
             string json = WebRequest.SendGet(new Uri(getUrl));
-            Debug.WriteLine(getUrl);
+  //          Debug.WriteLine(getUrl);
             return Unmarshaller<List<ActivityStream>>.Unmarshal(json);
         }
 
