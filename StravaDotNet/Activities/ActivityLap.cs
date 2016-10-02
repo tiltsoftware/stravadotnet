@@ -103,12 +103,12 @@ namespace Strava.Activities
             }
         }
 
+        [JsonProperty("start_date_local")]
         private string _startLocal;
 
         /// <summary>
         /// The local date and time when the lap was started.
         /// </summary>
-        [JsonProperty("start_date_local")]
         public DateTime StartLocal
         {
             get
