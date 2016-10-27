@@ -62,7 +62,7 @@ namespace Strava.Streams
         /// <summary>
         /// Temperature information is received.
         /// </summary>
-        Temperature = 256,
+        Temp = 256,
         /// <summary>
         /// Information about the time moved is received.
         /// </summary>
@@ -70,6 +70,6 @@ namespace Strava.Streams
         /// <summary>
         /// Information about the grade is received.
         /// </summary>
-        GradeSmooth = 1024
+        Grade_Smooth = 1024
     }
 }

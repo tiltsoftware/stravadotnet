@@ -61,7 +61,7 @@ namespace Strava.Streams
                 }
                 if (Type.Equals("grade_smooth"))
                 {
-                    return StreamType.GradeSmooth;
+                    return StreamType.Grade_Smooth;
                 }
                 if (Type.Equals("heartrate"))
                 {
@@ -73,7 +73,7 @@ namespace Strava.Streams
                 }
                 if (Type.Equals("temp"))
                 {
-                    return StreamType.Temperature;
+                    return StreamType.Temp;
                 }
                 if (Type.Equals("time"))
                 {
