@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Strava</RootNamespace>
     <AssemblyName>StravaDotNet</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\com.strava.api.StravaClient\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -54,6 +54,9 @@
     <Compile Include="Activities\ActivitySummary.cs" />
     <Compile Include="Activities\ActivityType.cs" />
     <Compile Include="Activities\ActivityZone.cs" />
+    <Compile Include="Activities\BestEffort.cs" />
+    <Compile Include="Activities\BestEffortAthlete.cs" />
+    <Compile Include="Activities\BestEffortForActivity.cs" />
     <Compile Include="Clients\RouteClient.cs" />
     <Compile Include="Clients\StatsClient.cs" />
     <Compile Include="Clubs\ClubEvent.cs" />
