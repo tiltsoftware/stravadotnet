@@ -1361,6 +1361,57 @@ namespace Strava.Clients
             return Unmarshaller<List<ActivityLap>>.Unmarshal(json);
         }
 
+        /// <summary>
+        /// Gets a list of all related activites
+        /// </summary>
+        /// <param name="activityId">activity id for which to find related activites</param>
+        /// <returns></returns>
+        public async Task<List<long>> GetReleatedActivityAsync(string activityId)
+        {
+            // max activities allowed by strava in each download.
+            const int perPage = 200;
+
+            int page = 1;
+
+            List<long> activityIds = new List<long>();
+
+            // loop until no activities are downloaded in last request to strava.
+            while (true)
+            {
+                var activitySummaries = await GetReleatedActivityAsync(activityId, page++, perPage);
+
+                if (activitySummaries.Count == 0)
+                    break;
+
+                foreach (ActivitySummary a in activitySummaries)
+                    activityIds.Add(a.Id);
+            }
+
+            return activityIds;
+        }
+
+
+        /// <summary>
+        /// Gets a list of all related activites
+        /// </summary>
+        /// <param name="activityId">activity id for which to find related activites</param>
+        /// <param name="page">The page of the list of activities.</param>
+        /// <param name="perPage">The amount of activities per page.</param>
+        /// <returns></returns>
+        private async Task<List<ActivitySummary>> GetReleatedActivityAsync(string activityId, int page, int perPage)
+        {
+            string getUrl = string.Format("{0}/{1}/related?&page={2}&per_page={3}&access_token={4}", 
+                Endpoints.Activity, 
+                activityId, 
+                page.ToString(),
+                perPage.ToString(),
+                Authentication.AccessToken);
+            string json = await Http.WebRequest.SendGetAsync(new Uri(getUrl));
+
+            return Unmarshaller<List<ActivitySummary>>.Unmarshal(json);
+        }
+
+
         #endregion
     }
 }
