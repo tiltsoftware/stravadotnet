@@ -69,18 +69,44 @@ namespace Strava.Segments
         /// </summary>
         [JsonProperty("maximum_grade")]
         public float MaxGrade { get; set; }
+        
+      
+        private float? _maxElevation { get; set; }
 
         /// <summary>
         /// The segment's highest elevation.
         /// </summary>
         [JsonProperty("elevation_high")]
-        public float MaxElevation { get; set; }
+        public float? MaxElevation
+        {
+            get
+            { return _maxElevation; }
+            set
+            {
+                if (value != null)
+                    _maxElevation = value;
+                else
+                    _maxElevation = 0;
+            }
+        }
 
+        private float? _minElevation { get; set; }
         /// <summary>
         /// The segment's lowest elevation.
         /// </summary>
-        [JsonProperty("elevation_low")]
-        public float MinElevation { get; set; }
+        ///  [JsonProperty("elevation_low")]
+        public float? MinElevation
+        {
+            get
+            { return _minElevation; }
+            set
+            {
+                if (value != null)
+                    _minElevation = value;
+                else
+                    _minElevation = 0;
+            }
+        }
 
         /// <summary>
         /// the climb category of the segment.
