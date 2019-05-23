@@ -32,7 +32,7 @@ namespace Strava.Activities
         /// The id of the segment.
         /// </summary>
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// The name of the segment.

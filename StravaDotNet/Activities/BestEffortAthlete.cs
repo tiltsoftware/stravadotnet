@@ -12,6 +12,6 @@ namespace Strava.Activities
         /// Gets or sets athlete id
         /// </summary>
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

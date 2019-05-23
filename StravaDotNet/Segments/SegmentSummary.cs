@@ -32,7 +32,7 @@ namespace Strava.Segments
         /// The id provided by Strava.
         /// </summary>
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// The resource state.
